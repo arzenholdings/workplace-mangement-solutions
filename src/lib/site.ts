@@ -7,9 +7,10 @@ export const siteConfig = {
   shortName: "WMS",
   url: siteUrl,
   domain: "workplacemanagementsolutions.com",
-  email: "hello@workplacemanagementsolutions.com",
+  email: "sales@workplacemgtsolutions.com",
+  phone: "425-577-4533",
   description:
-    "Premium AI automation, operational reporting, systems integration, workflow design, and infrastructure modernization for ambitious teams.",
+    "WMS builds websites, CRM, automation, AI, follow-up, and reporting systems that help owner-operated service businesses respond faster and book more work.",
   socialDescription:
-    "Modernize operations with AI workflows, automation, reporting systems, and enterprise infrastructure expertise.",
+    "Connect your website, CRM, follow-up, automation, AI, and reporting into one operating system for your service business.",
 };

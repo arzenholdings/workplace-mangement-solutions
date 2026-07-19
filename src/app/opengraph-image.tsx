@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site";
 
 export const alt =
-  "Workplace Management Solutions AI operations consulting preview";
+  "Workplace Management Solutions connected lead and workflow operating system";
 
 export const size = {
   width: 1200,
@@ -64,7 +64,7 @@ export default function Image() {
               textTransform: "uppercase",
             }}
           >
-            AI operations ecosystem
+            Workflow. Follow-up. Growth.
           </div>
           <div
             style={{
@@ -76,7 +76,7 @@ export default function Image() {
               letterSpacing: 0,
             }}
           >
-            Your business systems, moving as one intelligent field.
+            Build the system that turns leads into booked work.
           </div>
           <div
             style={{
@@ -87,8 +87,8 @@ export default function Image() {
               lineHeight: 1.35,
             }}
           >
-            AI automation, reporting, integrations, workflow design, and
-            infrastructure modernization.
+            Websites, CRM, automation, AI, follow-up, and reporting for
+            owner-operated service businesses.
           </div>
         </div>
       </div>

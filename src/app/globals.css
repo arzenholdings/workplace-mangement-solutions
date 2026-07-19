@@ -36,6 +36,45 @@ a {
   text-underline-offset: 0.2em;
 }
 
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.policy-copy h1 {
+  margin-top: 1.5rem;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 650;
+  line-height: 1;
+}
+
+.policy-copy h2 {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+  font-weight: 650;
+  color: #ffffff;
+}
+
+.policy-copy p,
+.policy-copy address {
+  margin-top: 1rem;
+  color: #cbd5e1;
+  font-size: 1rem;
+  font-style: normal;
+  line-height: 1.8;
+}
+
+.policy-copy .policy-date {
+  color: #94a3b8;
+}
+
+.policy-copy a {
+  color: #cffafe;
+}
+
 :focus-visible {
   outline: 2px solid #67e8f9;
   outline-offset: 4px;

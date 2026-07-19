@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site";
+import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -7,17 +8,18 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   referrer: "origin-when-cross-origin",
   title: {
-    default: `${siteConfig.name} | AI Operations Consulting`,
+    default: "Workplace Management Solutions | CRM, Automation and Lead Follow-Up",
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
   keywords: [
-    "AI automation consulting",
+    "CRM automation",
+    "lead follow-up",
+    "service business website",
+    "missed call text back",
     "workflow automation",
-    "operational reporting",
-    "systems integration",
-    "business process optimization",
-    "enterprise infrastructure",
+    "AI receptionist",
+    "business operating systems",
   ],
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
@@ -25,9 +27,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  category: "technology consulting",
+  category: "business services",
   openGraph: {
-    title: `${siteConfig.name} | AI Operations Consulting`,
+    title: "Workplace Management Solutions | CRM, Automation and Lead Follow-Up",
     description: siteConfig.socialDescription,
     url: "/",
     siteName: siteConfig.name,
@@ -38,13 +40,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} AI operations consulting preview`,
+        alt: `${siteConfig.name} connected lead and workflow operating system`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | AI Operations Consulting`,
+    title: "Workplace Management Solutions | CRM, Automation and Lead Follow-Up",
     description: siteConfig.socialDescription,
     images: ["/twitter-image"],
   },
@@ -73,6 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full scroll-smooth antialiased">
       <body className="min-h-full bg-background text-foreground">
+        <StructuredData />
         {children}
       </body>
     </html>
