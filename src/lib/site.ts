@@ -10,7 +10,7 @@ export const siteConfig = {
   email: "sales@workplacemgtsolutions.com",
   phone: "425-577-4533",
   description:
-    "WMS builds websites, CRM, automation, AI, follow-up, and reporting systems that help owner-operated service businesses respond faster and book more work.",
+    "WMS helps businesses find operational bottlenecks and build automated systems using GoHighLevel, CRM, AI, websites, reporting, and workflow design.",
   socialDescription:
-    "Connect your website, CRM, follow-up, automation, AI, and reporting into one operating system for your service business.",
+    "WMS finds the operational friction slowing a business down, then builds the automated systems that make it easier to run.",
 };

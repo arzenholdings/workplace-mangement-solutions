@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site";
 
 export const alt =
-  "Workplace Management Solutions connected lead and workflow operating system";
+  "Workplace Management Solutions GoHighLevel, CRM, and workflow automation";
 
 export const size = {
   width: 1200,
@@ -64,7 +64,7 @@ export default function Image() {
               textTransform: "uppercase",
             }}
           >
-            Workflow. Follow-up. Growth.
+            Operator-led business systems
           </div>
           <div
             style={{
@@ -76,7 +76,7 @@ export default function Image() {
               letterSpacing: 0,
             }}
           >
-            Build the system that turns leads into booked work.
+            Show us the workflow slowing your business down.
           </div>
           <div
             style={{
@@ -87,8 +87,8 @@ export default function Image() {
               lineHeight: 1.35,
             }}
           >
-            Websites, CRM, automation, AI, follow-up, and reporting for
-            owner-operated service businesses.
+            GoHighLevel, CRM, automation, AI, websites, reporting, and workflow
+            design—configured around how the business actually operates.
           </div>
         </div>
       </div>
