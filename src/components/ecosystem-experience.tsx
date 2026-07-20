@@ -32,7 +32,7 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { GlowGridBackground } from "@/components/glow-grid-background";
 import { OrbNetwork } from "@/components/orb-network";
 import { ParticleField } from "@/components/particle-field";
@@ -294,14 +294,7 @@ function SectionHeading({
   className?: string;
 }) {
   return (
-    <motion.div
-      className={`max-w-4xl ${className}`}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-90px" }}
-      transition={{ duration: 0.65 }}
-      variants={fadeUp}
-    >
+    <div className={`max-w-4xl ${className}`}>
       {kicker && (
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-100/75">
           {kicker}
@@ -311,7 +304,7 @@ function SectionHeading({
         {title}
       </h2>
       {copy && <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">{copy}</p>}
-    </motion.div>
+    </div>
   );
 }
 
@@ -364,8 +357,6 @@ function Footer() {
 }
 
 export function EcosystemExperience() {
-  const reducedMotion = useReducedMotion();
-
   return (
     <main id="top" className="overflow-hidden bg-[#05070d] text-white">
       <Header />
@@ -437,16 +428,12 @@ export function EcosystemExperience() {
             copy="Growth often creates more tools, more handoffs, more follow-up, and more administrative work. WMS finds where the system is breaking and rebuilds the workflow around how the business actually operates."
           />
           <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {problems.map((problem, index) => {
+            {problems.map((problem) => {
               const Icon = problem.icon;
               return (
                 <motion.article
                   key={problem.title}
                   className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-100/25 hover:bg-white/[0.06]"
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-70px" }}
-                  transition={{ duration: 0.5, delay: index * 0.06 }}
                 >
                   <span className="grid h-11 w-11 place-items-center rounded-xl border border-cyan-100/20 bg-cyan-100/10">
                     <Icon className="h-5 w-5 text-cyan-100" aria-hidden="true" />
@@ -483,10 +470,6 @@ export function EcosystemExperience() {
                       ? "border-[#f5d18a]/30 bg-[linear-gradient(145deg,rgba(245,209,138,0.08),rgba(255,255,255,0.035))]"
                       : "border-white/10 bg-slate-950/65 hover:border-cyan-100/30 hover:bg-white/[0.055]"
                   } ${index === capabilities.length - 1 ? "md:col-span-2 lg:col-span-1" : ""}`}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.5, delay: index * 0.045 }}
                 >
                   <div className="flex items-center justify-between gap-5">
                     <span
@@ -525,10 +508,6 @@ export function EcosystemExperience() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <motion.div
             className="relative min-h-[440px] overflow-hidden rounded-[2.5rem] border border-white/10 bg-slate-900"
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-90px" }}
-            transition={{ duration: 0.7 }}
           >
             <Image
               src="/wms-workflow-review.jpg"
@@ -594,10 +573,6 @@ export function EcosystemExperience() {
             />
             <motion.div
               className="relative min-h-[330px] overflow-hidden rounded-[2.25rem] border border-white/10"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
             >
               <Image
                 src="/wms-operators.jpg"
@@ -610,16 +585,12 @@ export function EcosystemExperience() {
             </motion.div>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {operatorPoints.map((point, index) => {
+            {operatorPoints.map((point) => {
               const Icon = point.icon;
               return (
                 <motion.article
                   key={point.title}
                   className="flex gap-5 rounded-[1.6rem] border border-white/10 bg-white/[0.04] p-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.48, delay: index * 0.06 }}
                 >
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-cyan-100/20 bg-cyan-100/10">
                     <Icon className="h-5 w-5 text-cyan-100" aria-hidden="true" />
@@ -643,14 +614,10 @@ export function EcosystemExperience() {
             copy="WMS begins with the operating friction, defines the better process, and only then builds the supporting system."
           />
           <ol className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
-            {process.map(([number, title, copy], index) => (
+            {process.map(([number, title, copy]) => (
               <motion.li
                 key={title}
                 className="relative rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-6"
-                initial={{ opacity: 0, y: 22 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.06 }}
               >
                 <span className="font-mono text-xs text-cyan-100">{number}</span>
                 <h3 className="mt-8 font-mono text-sm uppercase tracking-[0.2em] text-white">
@@ -672,16 +639,12 @@ export function EcosystemExperience() {
             copy="The goal is not more software. The goal is clearer ownership, less friction, and more consistent execution."
           />
           <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {outcomes.map((outcome, index) => {
+            {outcomes.map((outcome) => {
               const Icon = outcome.icon;
               return (
                 <motion.div
                   key={outcome.title}
                   className="flex items-center gap-4 rounded-2xl border border-white/10 bg-slate-950/65 p-5"
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.42, delay: index * 0.04 }}
                 >
                   <Icon className="h-5 w-5 shrink-0 text-cyan-100" aria-hidden="true" />
                   <p className="font-medium text-slate-100">{outcome.title}</p>
@@ -695,10 +658,6 @@ export function EcosystemExperience() {
       <section className="px-5 py-24 sm:px-8 lg:px-10 lg:py-32">
         <motion.div
           className="relative mx-auto grid max-w-7xl gap-10 overflow-hidden rounded-[2.75rem] border border-cyan-100/20 bg-[radial-gradient(circle_at_80%_20%,rgba(34,211,238,0.2),transparent_32%),radial-gradient(circle_at_10%_90%,rgba(245,209,138,0.08),transparent_30%),linear-gradient(135deg,#07111f,#030712)] p-8 sm:p-12 lg:grid-cols-[1fr_0.55fr] lg:items-end lg:p-16"
-          initial={{ opacity: 0, y: reducedMotion ? 0 : 26 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7 }}
         >
           <div className="relative z-10">
             <ClipboardCheck className="h-9 w-9 text-cyan-100" aria-hidden="true" />
