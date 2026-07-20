@@ -53,7 +53,10 @@ export function OrbNetwork({
 
   return (
     <div className={`w-full max-w-[620px] ${className}`}>
-      <div className="relative aspect-square w-full overflow-hidden rounded-full" aria-label="Interactive WMS operating system">
+      <div
+        className="relative aspect-square w-full overflow-visible"
+        aria-label="Interactive WMS operating system"
+      >
         <div className="absolute inset-[7%] rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(103,232,249,0.18),transparent_58%)]" />
         <motion.div
           className="absolute inset-[12%] rounded-full border border-cyan-100/15"
