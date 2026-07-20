@@ -39,23 +39,23 @@ import { ParticleField } from "@/components/particle-field";
 
 const problems = [
   {
-    title: "Broken Handoffs",
-    copy: "Leads, approvals, tasks, and customer requests stall between people, tools, and departments.",
+    title: "Missed Opportunities",
+    copy: "Calls go unanswered, forms sit too long, and prospects move on.",
     icon: Route,
   },
   {
-    title: "Disconnected Systems",
-    copy: "Your website, GoHighLevel, email, calendar, reporting, and internal workflows do not operate as one system.",
+    title: "Disconnected Tools",
+    copy: "Your website, inbox, CRM, calendar, phone, and reporting do not share one workflow.",
     icon: Network,
   },
   {
-    title: "Lost Follow-Up",
-    copy: "Opportunities disappear because ownership, reminders, and next steps are unclear.",
+    title: "Owner Bottleneck",
+    copy: "Follow-up, approvals, and decisions still depend on what the owner remembers.",
     icon: MessageSquareText,
   },
   {
-    title: "Administrative Drag",
-    copy: "Your team spends too much time copying information, chasing updates, and repeating work that should be automated.",
+    title: "Slow Follow-Up",
+    copy: "Missed calls, open estimates, and old leads stop moving when next steps rely on memory.",
     icon: RefreshCw,
   },
 ];
@@ -63,102 +63,102 @@ const problems = [
 const capabilities = [
   {
     id: "capability-diagnosis",
-    title: "Workflow Diagnosis",
-    copy: "We identify where work slows down, breaks, repeats, or disappears.",
+    title: "Capture",
+    copy: "Bring calls, forms, chat, ads, and referrals into one visible pipeline.",
     icon: Radar,
-    signal: "Friction, ownership, handoffs",
+    signal: "Calls, forms, chat, ads, referrals",
   },
   {
     id: "capability-crm",
-    title: "GoHighLevel & CRM Architecture",
-    copy: "We configure pipelines, forms, calendars, contacts, ownership, reminders, and follow-up around the way your business actually works.",
+    title: "Respond",
+    copy: "Text and email new leads while the opportunity is still active.",
     icon: Blocks,
-    signal: "Pipelines, calendars, routing",
+    signal: "Text and email new leads",
     featured: true,
   },
   {
-    id: "capability-follow-up",
-    title: "Automated Follow-Up",
-    copy: "We build practical email, SMS, task, notification, and appointment workflows so opportunities do not depend on memory.",
-    icon: Workflow,
-    signal: "Email, SMS, tasks, reminders",
+    id: "capability-website",
+    title: "Book",
+    copy: "Give customers a clear next step and move appointments onto the calendar.",
+    icon: Globe2,
+    signal: "Appointments on the calendar",
   },
   {
-    id: "capability-website",
-    title: "Website & Lead Capture",
-    copy: "We improve how prospects understand the business, trust the offer, and enter the right workflow.",
-    icon: Globe2,
-    signal: "Pages, forms, conversion paths",
+    id: "capability-follow-up",
+    title: "Follow Up",
+    copy: "Keep missed calls, open estimates, and old leads moving without relying on memory.",
+    icon: Workflow,
+    signal: "Missed calls, open estimates, old leads",
   },
   {
     id: "capability-reporting",
-    title: "Reporting & Visibility",
-    copy: "We create clearer dashboards, operating metrics, and management reporting so owners can see what is happening.",
+    title: "Report",
+    copy: "See what is working, what is stuck, and where the business is losing momentum.",
     icon: BarChart3,
-    signal: "Dashboards, metrics, accountability",
+    signal: "What works, what is stuck",
   },
   {
     id: "capability-ai",
-    title: "AI & Process Automation",
-    copy: "We use AI and automation to reduce repetitive administrative work, improve response time, and create more consistent execution.",
+    title: "Improve",
+    copy: "Use automation and AI where they remove work, not where they add complexity.",
     icon: Bot,
-    signal: "Automation with operator control",
+    signal: "Automation and AI",
   },
   {
     id: "capability-staffing",
-    title: "Staffing & Operating Structure",
-    copy: "We clarify roles, handoffs, accountability, and operating rhythm so the system works across people as well as software.",
+    title: "Operate",
+    copy: "Connect people, ownership, tools, and reporting so the business is easier to run.",
     icon: UsersRound,
-    signal: "Roles, SOPs, operating rhythm",
+    signal: "One business operating system",
   },
 ];
 
-const goHighLevelCapabilities = [
-  "Centralized lead and customer data",
-  "Automated email and SMS follow-up",
-  "Pipeline and opportunity tracking",
-  "Forms, calendars, and landing pages",
-  "Workflow automation",
-  "Reporting and accountability",
+const snapshotReviewAreas = [
+  "Lead flow",
+  "Handoffs",
+  "Tools",
+  "Follow-up",
+  "Operational bottlenecks",
+  "What to fix first",
 ];
 
-const operatorPoints = [
+const leadOfferPoints = [
   {
-    title: "Multi-location operating experience",
-    copy: "Systems designed with the handoffs, visibility, and accountability of real operations in mind.",
+    title: "Qualified home-service companies",
+    copy: "Built for companies with the capacity to answer, book, and serve more customers.",
     icon: Building2,
   },
   {
-    title: "Enterprise technology background",
-    copy: "Practical systems thinking across CRM, reporting, security, facilities, and business infrastructure.",
+    title: "One defined market",
+    copy: "One defined market.",
     icon: Layers3,
   },
   {
-    title: "GoHighLevel implementation",
-    copy: "Hands-on configuration of lead capture, pipelines, calendars, communication, and workflows.",
+    title: "One focused campaign",
+    copy: "One focused campaign.",
     icon: Zap,
   },
   {
-    title: "Executive and operator support",
-    copy: "Grounded guidance that connects technology decisions to ownership, process, and daily execution.",
+    title: "One measurable seven-day sprint",
+    copy: "One measurable seven-day sprint.",
     icon: Handshake,
   },
 ];
 
 const process = [
-  ["01", "Diagnose", "Identify where work gets stuck, duplicated, delayed, or lost."],
-  ["02", "Map", "Document the current workflow, ownership, tools, and handoffs."],
-  ["03", "Design", "Define the better process before configuring the technology."],
+  ["01", "Diagnose", "Complete the Workflow Snapshot and identify the highest-value bottleneck."],
   [
-    "04",
+    "02",
     "Build",
-    "Implement the GoHighLevel, CRM, automation, AI, website, reporting, or process solution.",
+    "WMS configures the page, CRM, pipeline, follow-up, automation, and reporting.",
   ],
   [
-    "05",
-    "Train and Improve",
-    "Make the system usable, measure the result, and improve the next bottleneck.",
+    "03",
+    "Launch",
+    "Your system begins capturing, responding to, and moving opportunities forward.",
   ],
+  ["04", "Review", "We review the results and repair weak points."],
+  ["05", "Improve", "Expand what works."],
 ];
 
 const outcomes = [
@@ -180,12 +180,10 @@ const fadeUp = {
 function Header() {
   const [open, setOpen] = useState(false);
   const links = [
-    ["How We Help", "#how-we-help"],
-    ["Operating System", "#operating-system"],
-    ["GoHighLevel", "#gohighlevel"],
-    ["Process", "#process"],
-    ["About", "#about"],
-    ["Workflow Snapshot", "/workflow-snapshot"],
+    ["Solutions", "#operating-system"],
+    ["How It Works", "#process"],
+    ["25 Leads in 7 Days", "https://try.workplacemgtsolutions.com"],
+    ["Client Login", "https://app.workplacemgtsolutions.com"],
   ];
 
   return (
@@ -228,7 +226,7 @@ function Header() {
             href="/workflow-snapshot"
             className="rounded-full bg-cyan-100 px-4 py-2.5 text-xs font-semibold text-slate-950 transition hover:bg-white"
           >
-            Request a Workflow Snapshot
+            Workflow Snapshot
           </Link>
         </nav>
         <button
@@ -274,7 +272,7 @@ function Header() {
             className="mt-1 rounded-xl bg-cyan-100 px-4 py-3 text-center text-sm font-semibold text-slate-950"
             onClick={() => setOpen(false)}
           >
-            Request a Workflow Snapshot
+            Workflow Snapshot
           </Link>
         </nav>
       )}
@@ -373,33 +371,31 @@ export function EcosystemExperience() {
             transition={{ duration: 0.85 }}
           >
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-100">
-              OPERATOR-LED BUSINESS SYSTEMS &amp; AUTOMATION
+              WORKFLOW. FOLLOW-UP. GROWTH.
             </p>
             <h1 className="mt-7 max-w-4xl text-4xl font-semibold leading-[0.98] text-white sm:text-6xl lg:text-7xl">
-              SHOW US THE WORKFLOW SLOWING YOUR BUSINESS DOWN.
+              BUILD THE SYSTEM THAT TURNS LEADS INTO BOOKED WORK.
             </h1>
             <p className="mt-7 max-w-2xl text-xl font-medium leading-8 text-cyan-50">
-              We find the friction, map the process, and build the automated system that makes your
-              business easier to run.
+              WMS connects your website, CRM, follow-up, automation, AI, and reporting into one
+              operating system for owner-operated service businesses.
             </p>
             <p className="mt-5 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              WMS helps owners uncover bottlenecks, clean up broken workflows, and connect the
-              systems behind the business. We use GoHighLevel, CRM, automation, AI, websites,
-              reporting, and process design to reduce friction and improve execution.
+              Respond faster. Book more work. Run with less chaos.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <WorkflowSnapshotLink />
+              <WorkflowSnapshotLink>Get My Workflow Snapshot</WorkflowSnapshotLink>
               <a
                 href="#process"
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/15 px-6 text-sm font-semibold text-white transition hover:border-cyan-100/50 hover:bg-white/10"
               >
-                See How WMS Works
+                See How It Works
               </a>
             </div>
             <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6 text-sm text-slate-400">
-              <span>Process first</span>
-              <span>Technology configured around it</span>
-              <span>One workflow at a time</span>
+              <span>Respond faster</span>
+              <span>More booked work</span>
+              <span>Run with less chaos</span>
             </div>
           </motion.div>
           <motion.div
@@ -423,9 +419,9 @@ export function EcosystemExperience() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(45,212,191,0.1),transparent_28%)]" />
         <div className="relative mx-auto max-w-7xl">
           <SectionHeading
-            kicker="THE OPERATIONAL PROBLEM"
-            title="YOUR BUSINESS SHOULD NOT BE THIS HARD TO OPERATE."
-            copy="Growth often creates more tools, more handoffs, more follow-up, and more administrative work. WMS finds where the system is breaking and rebuilds the workflow around how the business actually operates."
+            kicker="THE REVENUE LEAK"
+            title={<>YOUR BUSINESS DOES NOT NEED MORE SOFTWARE.<br />IT NEEDS A SYSTEM.</>}
+            copy="Every missed call, forgotten estimate, disconnected form, and manual handoff creates another place for revenue to disappear."
           />
           <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {problems.map((problem) => {
@@ -454,9 +450,9 @@ export function EcosystemExperience() {
         <GlowGridBackground intensity="subtle" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <SectionHeading
-            kicker="WHAT WMS BUILDS"
-            title="ONE CONNECTED OPERATING SYSTEM INSTEAD OF ANOTHER DISCONNECTED TOOL."
-            copy="WMS designs the process first, then configures the technology around it."
+            kicker="THE WMS OPERATING SYSTEM"
+            title="ONE OPERATING SYSTEM FROM FIRST CLICK TO CLOSED JOB."
+            copy="Capture the opportunity, respond while it is active, and keep every next step visible."
           />
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {capabilities.map((capability, index) => {
@@ -519,27 +515,26 @@ export function EcosystemExperience() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#05070d] via-transparent to-transparent" />
             <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/10 bg-slate-950/80 p-5 backdrop-blur">
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#f5d18a]">
-                PLATFORM + OPERATING DESIGN
+                START WITH THE WORKFLOW
               </p>
               <p className="mt-2 text-sm leading-6 text-slate-200">
-                The workflow determines the configuration—not the other way around.
+                Find the highest-value bottleneck before adding another tool.
               </p>
             </div>
           </motion.div>
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#f5d18a]">
-              WHY GOHIGHLEVEL
+              WMS WORKFLOW SNAPSHOT
             </p>
             <h2 className="mt-5 text-3xl font-semibold leading-[1.05] text-white sm:text-5xl">
-              GOHIGHLEVEL IS THE PLATFORM. THE OPERATING SYSTEM IS THE VALUE.
+              SHOW US THE WORKFLOW SLOWING YOUR BUSINESS DOWN.
             </h2>
             <p className="mt-6 text-lg leading-8 text-slate-300">
-              WMS uses GoHighLevel as a central platform for CRM, lead capture, calendars,
-              communication, follow-up, pipelines, and automation. We configure it around the
-              business rather than forcing the business into a generic template.
+              Complete a focused 15-minute assessment. We will map your lead flow, handoffs,
+              tools, follow-up, and operational bottlenecks, then show you what to fix first.
             </p>
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {goHighLevelCapabilities.map((capability) => (
+              {snapshotReviewAreas.map((capability) => (
                 <div
                   key={capability}
                   className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3"
@@ -553,7 +548,7 @@ export function EcosystemExperience() {
               ))}
             </div>
             <p className="mt-8 text-lg font-semibold text-white">
-              The technology matters. The operating design matters more.
+              Start with the Workflow Snapshot and identify what to fix first.
             </p>
           </div>
         </div>
@@ -567,9 +562,9 @@ export function EcosystemExperience() {
         <div className="relative mx-auto max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
             <SectionHeading
-              kicker="OPERATOR CREDIBILITY"
-              title="BUILT BY OPERATORS FOR BUSINESSES THAT NEED REAL STRUCTURE."
-              copy="WMS brings an operator's view to CRM, staffing, websites, reporting, automation, security, facilities, and daily execution. We do not install technology in isolation. We build systems that fit the way the business needs to run."
+              kicker="FOR HOME-SERVICE BUSINESSES"
+              title={<>NEED DEMAND NOW?<br />25 LEADS IN 7 DAYS.</>}
+              copy="Built for qualified home-service companies with the capacity to answer, book, and serve more customers. One defined market. One focused campaign. One measurable seven-day sprint."
             />
             <motion.div
               className="relative min-h-[330px] overflow-hidden rounded-[2.25rem] border border-white/10"
@@ -585,7 +580,7 @@ export function EcosystemExperience() {
             </motion.div>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {operatorPoints.map((point) => {
+            {leadOfferPoints.map((point) => {
               const Icon = point.icon;
               return (
                 <motion.article
@@ -610,8 +605,8 @@ export function EcosystemExperience() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             kicker="HOW IT WORKS"
-            title="START WITH ONE WORKFLOW."
-            copy="WMS begins with the operating friction, defines the better process, and only then builds the supporting system."
+            title="DIAGNOSE. BUILD. LAUNCH. IMPROVE."
+            copy="Start with the highest-value bottleneck, build the supporting system, then improve what the results reveal."
           />
           <ol className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
             {process.map(([number, title, copy]) => (
@@ -634,9 +629,9 @@ export function EcosystemExperience() {
         <GlowGridBackground intensity="subtle" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <SectionHeading
-            kicker="OPERATIONAL OUTCOMES"
-            title="THE SYSTEM SHOULD CREATE MEASURABLE OPERATIONAL IMPROVEMENT."
-            copy="The goal is not more software. The goal is clearer ownership, less friction, and more consistent execution."
+            kicker="THE RESULT"
+            title="RESPOND FASTER. BOOK MORE WORK. RUN WITH LESS CHAOS."
+            copy="The system should make opportunities easier to see, next steps easier to execute, and performance easier to improve."
           />
           <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {outcomes.map((outcome) => {
@@ -662,17 +657,15 @@ export function EcosystemExperience() {
           <div className="relative z-10">
             <ClipboardCheck className="h-9 w-9 text-cyan-100" aria-hidden="true" />
             <h2 className="mt-7 max-w-4xl text-3xl font-semibold leading-[1.05] text-white sm:text-5xl">
-              SHOW US THE WORKFLOW SLOWING YOUR BUSINESS DOWN.
+              YOUR NEXT SYSTEM SHOULD MAKE WORK EASIER, NOT ADD ANOTHER LOGIN.
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-              Complete a short assessment so WMS can understand the business, identify the likely
-              bottleneck, and determine whether a systems review makes sense.
-            </p>
-            <p className="mt-5 font-mono text-xs uppercase tracking-[0.2em] text-[#f5d18a]">
-              No generic software pitch. We start with the workflow.
+              Start with the Workflow Snapshot.
             </p>
           </div>
-          <WorkflowSnapshotLink className="relative z-10 w-full lg:justify-self-end" />
+          <WorkflowSnapshotLink className="relative z-10 w-full lg:justify-self-end">
+            Get My Workflow Snapshot
+          </WorkflowSnapshotLink>
         </motion.div>
       </section>
 
