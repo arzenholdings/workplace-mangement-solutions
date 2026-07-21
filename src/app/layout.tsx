@@ -64,10 +64,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: {
-    icon: [{ url: "/favicon.ico" }, { url: "/icon", type: "image/png" }],
-    apple: [{ url: "/apple-icon", type: "image/png" }],
-  },
 };
 
 export default function RootLayout({
