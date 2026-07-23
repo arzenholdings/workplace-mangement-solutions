@@ -35,12 +35,12 @@ export function WorkflowSnapshotForm() {
     <div className="grid gap-6">
       <section
         aria-labelledby="workflow-snapshot-form-title"
-        className="min-w-0 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2 shadow-2xl shadow-cyan-950/25 backdrop-blur-xl sm:p-4"
+        className="min-w-0 overflow-hidden rounded-xl border border-[#1a292f] bg-[#0d1418] p-2 shadow-2xl shadow-black/30 sm:p-4"
       >
         <h2 id="workflow-snapshot-form-title" className="sr-only">
           WMS Workflow Snapshot
         </h2>
-        <div className="min-w-0 overflow-hidden rounded-[1.5rem] bg-white">
+        <div className="min-w-0 overflow-hidden rounded-lg bg-white">
           <iframe
             ref={iframeRef}
             id="bXm8ImcmR1hRAcfp5iv3"
@@ -55,7 +55,7 @@ export function WorkflowSnapshotForm() {
           src="https://link.msgsndr.com/js/form_embed.js"
           strategy="afterInteractive"
         />
-        <p className="px-4 pb-3 pt-5 text-center text-xs leading-5 text-slate-400">
+        <p className="px-4 pb-3 pt-5 text-center text-xs leading-5 text-[#718087]">
           Your answers are sent securely to Workplace Management Solutions for review.
         </p>
       </section>
@@ -63,29 +63,29 @@ export function WorkflowSnapshotForm() {
       {submitted && (
         <section
           aria-live="polite"
-          className="rounded-[2rem] border border-cyan-100/25 bg-cyan-100/[0.07] p-7 shadow-2xl shadow-cyan-950/20 sm:p-9"
+          className="rounded-xl border border-[#27414b] bg-[#102028] p-7 shadow-2xl shadow-black/20 sm:p-9"
         >
-          <CheckCircle2 className="h-10 w-10 text-cyan-100" aria-hidden="true" />
-          <h2 className="mt-6 text-3xl font-semibold text-white">
+          <CheckCircle2 className="h-10 w-10 text-[#73e4fa]" aria-hidden="true" />
+          <h2 className="wms-card-title mt-6 text-3xl">
             Your Workflow Snapshot is on its way.
           </h2>
-          <p className="mt-5 text-base leading-7 text-slate-200 sm:text-lg sm:leading-8">
+          <p className="mt-5 text-base leading-7 text-[#dce3e6] sm:text-lg sm:leading-8">
             We received your information and will review the systems, handoffs, and bottlenecks you
             identified.
           </p>
-          <p className="mt-3 text-base leading-7 text-slate-200 sm:text-lg sm:leading-8">
+          <p className="mt-3 text-base leading-7 text-[#dce3e6] sm:text-lg sm:leading-8">
             Check your inbox for confirmation and the next step.
           </p>
           <a
             href={CALENDAR_URL}
             target="_blank"
             rel="noreferrer"
-            className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-cyan-100 px-6 text-center text-sm font-semibold text-slate-950 transition hover:bg-white sm:w-auto"
+            className="wms-button mt-8 w-full sm:w-auto"
           >
             <CalendarClock className="h-4 w-4" aria-hidden="true" />
             Schedule a 15-Minute Discovery Call
           </a>
-          <p className="mt-4 text-sm leading-6 text-slate-400">
+          <p className="mt-4 text-sm leading-6 text-[#718087]">
             Scheduling is optional. You can book now or return when the timing works for you.
           </p>
         </section>

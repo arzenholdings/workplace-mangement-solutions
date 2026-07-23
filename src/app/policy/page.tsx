@@ -11,24 +11,24 @@ export const metadata: Metadata = {
 
 export default function PolicyPage() {
   return (
-    <main className="min-h-screen bg-[#05070d] px-5 py-6 text-white sm:px-8 lg:px-10">
+    <main className="wms-grid-bg min-h-screen bg-[#06090b] px-5 py-6 text-white sm:px-8 lg:px-10">
       <div className="mx-auto max-w-4xl">
-        <header className="flex items-center justify-between">
+        <header className="flex items-center justify-between border-b border-white/[0.07] pb-4">
           <Link href="/" className="flex items-center gap-3" aria-label="Workplace Management Solutions home">
-            <span className="grid h-10 w-10 place-items-center rounded-xl border border-cyan-100/30 bg-cyan-100/10">
-              <Sparkles className="h-5 w-5 text-cyan-100" />
+            <span className="wms-logo-mark">
+              <Sparkles className="h-4 w-4" />
             </span>
             <span className="hidden text-sm font-semibold sm:block">{siteConfig.name}</span>
             <span className="text-sm font-semibold sm:hidden">WMS</span>
           </Link>
-          <Link href="/" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-4 text-sm text-slate-200">
+          <Link href="/" className="wms-button-secondary min-h-11 px-4">
             <ArrowLeft className="h-4 w-4" />
             Home
           </Link>
         </header>
 
         <article className="policy-copy py-16 sm:py-24">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-100">WMS POLICY</p>
+          <p className="wms-kicker">WMS policy</p>
           <h1>Privacy Policy and Terms</h1>
           <p className="policy-date">Effective July 19, 2026</p>
 
@@ -115,4 +115,3 @@ export default function PolicyPage() {
     </main>
   );
 }
-

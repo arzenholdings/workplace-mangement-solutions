@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Radar, Sparkles } from "lucide-react";
-import { GlowGridBackground } from "@/components/glow-grid-background";
-import { ParticleField } from "@/components/particle-field";
 import { WorkflowSnapshotForm } from "@/components/workflow-snapshot-form";
 
 export const metadata: Metadata = {
@@ -20,21 +18,20 @@ export const metadata: Metadata = {
 
 export default function WorkflowSnapshotPage() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#05070d] px-5 pb-20 pt-6 text-white sm:px-8 lg:px-10">
-      <GlowGridBackground intensity="normal" />
-      <ParticleField density="low" />
+    <main className="wms-grid-bg relative min-h-screen overflow-hidden bg-[#06090b] px-5 pb-20 pt-4 text-white sm:px-8 lg:px-10">
+      <div className="wms-hero-glow" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-6xl">
-        <header className="flex items-center justify-between py-3">
+        <header className="flex items-center justify-between border-b border-white/[0.07] py-4">
           <Link href="/" className="flex items-center gap-3" aria-label="Workplace Management Solutions home">
-            <span className="grid h-10 w-10 place-items-center rounded-xl border border-cyan-100/30 bg-cyan-100/10">
-              <Sparkles className="h-5 w-5 text-cyan-100" />
+            <span className="wms-logo-mark">
+              <Sparkles className="h-4 w-4" />
             </span>
             <span className="hidden text-sm font-semibold sm:block">Workplace Management Solutions</span>
             <span className="text-sm font-semibold sm:hidden">WMS</span>
           </Link>
           <Link
             href="/"
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-4 text-sm text-slate-200 transition hover:bg-white/10"
+            className="wms-button-secondary min-h-11 px-4"
           >
             <ArrowLeft className="h-4 w-4" />
             Home
@@ -43,26 +40,26 @@ export default function WorkflowSnapshotPage() {
 
         <div className="grid gap-12 py-16 lg:grid-cols-[0.82fr_1.18fr] lg:items-start lg:py-24">
           <div className="lg:sticky lg:top-12">
-            <Radar className="h-8 w-8 text-cyan-100" />
-            <p className="mt-7 font-mono text-xs uppercase tracking-[0.3em] text-cyan-100">
-              WMS WORKFLOW SNAPSHOT
+            <Radar className="h-8 w-8 text-[#73e4fa]" />
+            <p className="wms-kicker mt-7">
+              WMS Workflow Snapshot
             </p>
-            <h1 className="mt-6 text-4xl font-semibold leading-[1.02] sm:text-6xl">
-              SHOW US WHERE WORK IS GETTING STUCK.
+            <h1 className="wms-heading mt-6">
+              Show us where work is <span className="text-[#39d5f6]">getting stuck.</span>
             </h1>
-            <p className="mt-7 text-lg leading-8 text-slate-300">
+            <p className="mt-7 text-lg leading-8 text-[#a7b2b8]">
               Answer a focused set of questions about your leads, follow-up, tools, and daily
               operations.
             </p>
-            <p className="mt-4 text-lg leading-8 text-slate-300">
+            <p className="mt-4 text-lg leading-8 text-[#a7b2b8]">
               WMS will use your answers to identify the highest-value workflow problem and recommend
               the best next step.
             </p>
             <a
               href="#snapshot-form"
-              className="mt-8 inline-flex min-h-12 items-center justify-center rounded-full border border-cyan-100/30 bg-cyan-100/10 px-6 text-sm font-semibold text-cyan-50 transition hover:bg-cyan-100 hover:text-slate-950"
+              className="wms-button mt-8"
             >
-              Start My Workflow Snapshot
+              Start my Workflow Snapshot
             </a>
           </div>
           <div id="snapshot-form" className="scroll-mt-6">
@@ -73,4 +70,3 @@ export default function WorkflowSnapshotPage() {
     </main>
   );
 }
-

@@ -2,16 +2,19 @@ export default function Loading() {
   return (
     <main
       aria-label="Loading Workplace Management Solutions"
-      className="min-h-screen bg-[#05070d] text-white"
+      className="min-h-screen bg-[#06090b] text-white"
     >
-      <section className="relative flex min-h-screen items-center overflow-hidden px-5 py-8 sm:px-8 lg:px-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(45,212,191,0.18),transparent_30%),radial-gradient(circle_at_78%_62%,rgba(99,102,241,0.16),transparent_32%),linear-gradient(180deg,#05070d_0%,#07111f_76%,#030712_100%)]" />
-        <div className="relative z-10 mx-auto w-full max-w-7xl">
-          <div className="h-10 w-28 rounded-full bg-white/10" />
-          <div className="mt-10 h-7 w-64 max-w-full rounded-full bg-cyan-100/10" />
-          <div className="mt-8 h-16 max-w-4xl rounded-3xl bg-white/10 sm:h-24" />
-          <div className="mt-4 h-16 max-w-3xl rounded-3xl bg-white/10 sm:h-24" />
-          <div className="mt-8 h-24 max-w-2xl rounded-3xl bg-white/[0.07]" />
+      <section className="wms-grid-bg relative flex min-h-screen items-center overflow-hidden px-5 py-8 sm:px-8 lg:px-10">
+        <div className="wms-hero-glow" aria-hidden="true" />
+        <div className="relative z-10 mx-auto grid w-full max-w-[1180px] gap-12 lg:grid-cols-2">
+          <div>
+            <div className="h-4 w-52 rounded-full bg-[#39d5f6]/10" />
+            <div className="mt-8 h-16 max-w-xl rounded-lg bg-white/[0.07] sm:h-24" />
+            <div className="mt-3 h-16 max-w-lg rounded-lg bg-white/[0.07] sm:h-24" />
+            <div className="mt-8 h-24 max-w-xl rounded-lg bg-white/[0.04]" />
+            <div className="mt-8 h-12 w-56 max-w-full rounded-full bg-[#39d5f6]/15" />
+          </div>
+          <div className="h-[460px] rounded-xl border border-[#1a292f] bg-[#0d1418]" />
         </div>
       </section>
     </main>

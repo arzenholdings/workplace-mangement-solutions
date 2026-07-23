@@ -1,7 +1,20 @@
 import type { Metadata } from "next";
+import { Inter, Inter_Tight } from "next/font/google";
 import { siteConfig } from "@/lib/site";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  variable: "--font-inter-tight",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -72,7 +85,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full scroll-smooth antialiased">
+    <html
+      lang="en"
+      className={`${inter.variable} ${interTight.variable} h-full scroll-smooth antialiased`}
+    >
       <body className="min-h-full bg-background text-foreground">
         <StructuredData />
         {children}
