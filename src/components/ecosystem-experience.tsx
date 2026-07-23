@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
@@ -344,14 +345,14 @@ function WorkflowSnapshotLink({
 
 function LeadCommandCenter() {
   const leads = [
-    ["New website inquiry", "Home remodeling", "Now"],
-    ["Missed call recovered", "Plumbing service", "2m"],
-    ["Estimate follow-up", "Roof repair", "12m"],
-    ["Appointment booked", "HVAC service", "Today"],
+    ["New website inquiry", "Captured · Home remodeling", "Now"],
+    ["Missed call recovered", "Responded · Plumbing service", "2m"],
+    ["Estimate follow-up", "Assigned · Roof repair", "12m"],
+    ["Appointment booked", "Booked · HVAC service", "Today"],
   ];
 
   return (
-    <div className="wms-console relative">
+    <div className="wms-console wms-accent-edge relative">
       <div className="flex items-center justify-between border-b border-white/[0.07] px-4 py-3 sm:px-5">
         <div>
           <p className="wms-console-label">WMS command center</p>
@@ -381,7 +382,13 @@ function LeadCommandCenter() {
               >
                 <span
                   className={`h-2 w-2 rounded-full ${
-                    index === 0 ? "bg-[#39d5f6]" : index === 1 ? "bg-[#f3c96a]" : "bg-[#54e1a4]"
+                    index === 0
+                      ? "bg-[#39d5f6]"
+                      : index === 1
+                        ? "bg-[#8B5CF6]"
+                        : index === 2
+                          ? "bg-[#D946EF]"
+                          : "bg-[#54e1a4]"
                   }`}
                 />
                 <span className="min-w-0">
@@ -416,7 +423,15 @@ function LeadCommandCenter() {
               {[38, 57, 46, 72, 62, 84, 76].map((height, index) => (
                 <span
                   key={height}
-                  className={`flex-1 rounded-t-sm ${index === 5 ? "bg-[#39d5f6]" : "bg-[#1b3b46]"}`}
+                  className={`flex-1 rounded-t-sm ${
+                    index === 5
+                      ? "bg-[#39d5f6]"
+                      : index === 3
+                        ? "bg-[#8B5CF6]"
+                        : index === 6
+                          ? "bg-[#D946EF]"
+                          : "bg-[#1b3b46]"
+                  }`}
                   style={{ height: `${height}%` }}
                 />
               ))}
@@ -484,8 +499,18 @@ function WorkflowLeakConsole() {
 }
 
 function OperatingSystemMap() {
+  const statuses = [
+    "Inquiry received",
+    "Response sent",
+    "Booking offered",
+    "Sequence active",
+    "Pipeline visible",
+    "Review ready",
+    "System connected",
+  ];
+
   return (
-    <div className="wms-console overflow-visible">
+    <div className="wms-console wms-product-proof overflow-visible">
       <div className="border-b border-white/[0.07] px-5 py-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
@@ -497,26 +522,46 @@ function OperatingSystemMap() {
           </span>
         </div>
       </div>
-      <div className="grid gap-px bg-white/[0.06] md:grid-cols-7">
+      <div className="grid gap-px bg-white/[0.06] sm:grid-cols-2 lg:grid-cols-7">
         {capabilities.map((capability, index) => {
           const Icon = capability.icon;
           return (
             <div
               key={capability.title}
-              className={`relative bg-[#0d1418] px-3 py-5 text-center ${
-                index === 1 ? "md:bg-[#102028]" : ""
+              className={`relative bg-[#0d1418] px-4 py-6 text-center ${
+                index === 1 ? "lg:bg-[#100f1b]" : ""
               }`}
             >
-              <span className="mx-auto grid h-9 w-9 place-items-center rounded-md border border-[#27414b] bg-[#111b20] text-[#73e4fa]">
+              <span
+                className={`mx-auto grid h-10 w-10 place-items-center rounded-md border bg-[#111b20] ${
+                  index === 1
+                    ? "border-[#8B5CF6]/40 text-[#c4b5fd]"
+                    : "border-[#27414b] text-[#73e4fa]"
+                }`}
+              >
                 <Icon className="h-4 w-4" aria-hidden="true" />
               </span>
               <p className="mt-3 text-xs font-medium text-white">{capability.title}</p>
-              <p className="mt-2 text-[9px] uppercase leading-4 tracking-[0.08em] text-[#718087]">
+              <p className="mt-2 text-[10px] uppercase leading-4 tracking-[0.07em] text-[#718087]">
                 {capability.signal}
               </p>
+              <span className="mt-4 inline-flex items-center gap-1.5 text-[9px] font-medium text-[#a7b2b8]">
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    index === 1
+                      ? "bg-[#8B5CF6]"
+                      : index === 5
+                        ? "bg-[#F472B6]"
+                        : "bg-[#39d5f6]"
+                  }`}
+                />
+                {statuses[index]}
+              </span>
               {index < capabilities.length - 1 && (
                 <ArrowRight
-                  className="absolute -right-2 top-8 z-10 hidden h-3.5 w-3.5 text-[#39d5f6] md:block"
+                  className={`absolute -right-2 top-9 z-10 hidden h-3.5 w-3.5 lg:block ${
+                    index === 0 ? "text-[#8B5CF6]" : "text-[#39d5f6]"
+                  }`}
                   aria-hidden="true"
                 />
               )}
@@ -574,7 +619,13 @@ function SnapshotDiagnostic() {
           {[0, 1, 2, 3, 4, 5].map((item) => (
             <span
               key={item}
-              className={`h-1 flex-1 rounded-full ${item < 4 ? "bg-[#39d5f6]" : "bg-white/[0.08]"}`}
+              className={`h-1 flex-1 rounded-full ${
+                item < 3
+                  ? "bg-[#39d5f6]"
+                  : item === 3
+                    ? "bg-gradient-to-r from-[#39d5f6] to-[#8B5CF6]"
+                    : "bg-white/[0.08]"
+              }`}
             />
           ))}
         </div>
@@ -613,6 +664,53 @@ function SnapshotDiagnostic() {
   );
 }
 
+function FounderLedSection() {
+  return (
+    <section
+      id="founder-led"
+      className="wms-section wms-founder-section scroll-mt-20 border-b border-white/[0.06]"
+    >
+      <div className="mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[1.04fr_.96fr] lg:items-center">
+        <figure className="wms-founder-photo">
+          <Image
+            src="/wms-founder-led-operations.jpg"
+            alt="A consultant and business owner reviewing an operational workflow together on a laptop."
+            width={1600}
+            height={1066}
+            sizes="(max-width: 1024px) 100vw, 52vw"
+            className="h-auto w-full object-cover"
+          />
+          <div className="wms-founder-photo-shade" aria-hidden="true" />
+          <figcaption className="absolute inset-x-0 bottom-0 z-10 flex items-center gap-3 p-5 text-xs text-[#dce3e6] sm:p-6">
+            <span className="h-px w-8 bg-gradient-to-r from-[#39d5f6] to-[#8B5CF6]" />
+            Systems are built with people, not handed off to them.
+          </figcaption>
+        </figure>
+
+        <div>
+          <p className="wms-kicker wms-kicker-violet">Founder-led implementation</p>
+          <h2 className="wms-heading mt-5">
+            Built by an <span className="text-[#39d5f6]">operator,</span> not another software vendor.
+          </h2>
+          <p className="mt-6 text-base leading-7 text-[#a7b2b8] sm:text-lg sm:leading-8">
+            WMS was created by Ben Bentitou after more than two decades working across systems
+            engineering, business technology, and operations. The goal is straightforward:
+            connect the tools, people, and follow-up processes that turn interest into booked work.
+          </p>
+          <div className="mt-8 flex items-center gap-4 border-t border-white/[0.08] pt-6">
+            <span className="wms-founder-monogram" aria-hidden="true">
+              WMS
+            </span>
+            <p className="max-w-xl text-sm font-medium leading-6 text-[#dce3e6]">
+              You work directly with the person helping design and implement the system.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer className="border-t border-white/[0.07] bg-[#05080a] px-5 py-10 sm:px-8">
@@ -647,7 +745,7 @@ export function EcosystemExperience() {
 
       <section className="wms-grid-bg relative overflow-hidden border-b border-white/[0.06] px-5 py-20 sm:px-8 sm:py-28 lg:py-32">
         <div className="wms-hero-glow" aria-hidden="true" />
-        <div className="relative z-10 mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+        <div className="relative z-10 mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
           <div>
             <p className="wms-kicker">Workflow. Follow-up. Growth.</p>
             <h1 className="wms-display mt-6 max-w-[680px]">
@@ -735,6 +833,8 @@ export function EcosystemExperience() {
           </div>
         </div>
       </section>
+
+      <FounderLedSection />
 
       <section id="operating-system" className="wms-section scroll-mt-20">
         <div className="mx-auto max-w-[1180px]">
