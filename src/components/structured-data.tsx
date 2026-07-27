@@ -8,10 +8,19 @@ export function StructuredData() {
         "@type": "Organization",
         "@id": `${siteConfig.url}/#organization`,
         name: siteConfig.name,
+        legalName: siteConfig.legalName,
         alternateName: siteConfig.shortName,
         url: siteConfig.url,
         email: siteConfig.email,
-        telephone: "+1-425-577-4533",
+        telephone: siteConfig.phoneE164,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: siteConfig.address.street,
+          addressLocality: siteConfig.address.city,
+          addressRegion: siteConfig.address.region,
+          postalCode: siteConfig.address.postalCode,
+          addressCountry: siteConfig.address.country,
+        },
         areaServed: "United States",
       },
       {
@@ -54,4 +63,3 @@ export function StructuredData() {
     />
   );
 }
-

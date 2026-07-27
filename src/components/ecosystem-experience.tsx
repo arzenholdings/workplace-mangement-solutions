@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import { siteConfig } from "@/lib/site";
 import {
   ArrowRight,
   BarChart3,
@@ -717,14 +718,20 @@ function Footer() {
       <div className="mx-auto flex max-w-[1180px] flex-col gap-8 text-sm text-[#718087] sm:flex-row sm:items-end sm:justify-between">
         <div>
           <WmsMark compact />
-          <p className="mt-4">425-577-4533</p>
-          <a className="mt-1 block hover:text-[#73e4fa]" href="mailto:sales@workplacemgtsolutions.com">
-            sales@workplacemgtsolutions.com
+          <a className="mt-4 block hover:text-[#73e4fa]" href={`tel:${siteConfig.phoneE164}`}>
+            {siteConfig.phone}
           </a>
+          <a className="mt-1 block hover:text-[#73e4fa]" href={`mailto:${siteConfig.email}`}>
+            {siteConfig.email}
+          </a>
+          <p className="mt-1">{siteConfig.address.formatted}</p>
         </div>
         <div className="flex flex-wrap gap-x-5 gap-y-3">
-          <Link className="hover:text-white" href="/policy">
-            Privacy &amp; terms
+          <Link className="hover:text-white" href="/privacy">
+            Privacy
+          </Link>
+          <Link className="hover:text-white" href="/terms">
+            Terms
           </Link>
           <a className="hover:text-white" href="https://try.workplacemgtsolutions.com">
             25 Leads in 7 Days
