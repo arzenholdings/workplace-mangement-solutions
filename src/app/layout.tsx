@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Inter_Tight } from "next/font/google";
+import Script from "next/script";
 import { siteConfig } from "@/lib/site";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
@@ -92,6 +93,12 @@ export default function RootLayout({
       <body className="min-h-full bg-background text-foreground">
         <StructuredData />
         {children}
+        <Script
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="6a5e92cbfd9ec29d7c8c77f6"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
