@@ -58,6 +58,12 @@ export default function TermsPage() {
             <Link href="/privacy">Privacy Policy</Link>.
           </p>
 
+          <h2>Eligibility</h2>
+          <p>
+            You must be 18 years of age or older to participate in the Workplace Management
+            Solutions SMS Program.
+          </p>
+
           <h2>Website use</h2>
           <p>
             This website provides general information about WMS services. It is not a guarantee of
