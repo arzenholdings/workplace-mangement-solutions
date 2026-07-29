@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import { InteractiveDotGrid } from "@/components/interactive-dot-grid";
 import { siteConfig } from "@/lib/site";
 import {
   ArrowRight,
@@ -752,6 +753,7 @@ export function EcosystemExperience() {
 
       <section className="wms-grid-bg relative overflow-hidden border-b border-white/[0.06] px-5 py-20 sm:px-8 sm:py-28 lg:py-32">
         <div className="wms-hero-glow" aria-hidden="true" />
+        <InteractiveDotGrid className="z-[1] [mask-image:radial-gradient(ellipse_at_center,black_42%,transparent_98%)]" />
         <div className="relative z-10 mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
           <div>
             <p className="wms-kicker">Workflow. Follow-up. Growth.</p>
