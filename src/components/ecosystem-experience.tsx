@@ -907,8 +907,8 @@ export function EcosystemExperience() {
             kicker="The WMS operating system"
             title={
               <>
-                One operating system from first click to{" "}
-                <span className="text-[#39d5f6]">closed job.</span>
+                One system that turns interest into{" "}
+                <span className="text-[#39d5f6]">qualified leads and bookings.</span>
               </>
             }
             copy="Capture the opportunity, respond while it is active, and keep every next step visible."
