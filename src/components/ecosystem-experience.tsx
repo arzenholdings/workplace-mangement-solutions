@@ -756,16 +756,17 @@ export function EcosystemExperience() {
         <InteractiveDotGrid className="z-[1] [mask-image:radial-gradient(ellipse_at_center,black_42%,transparent_98%)]" />
         <div className="relative z-10 mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
           <div>
-            <p className="wms-kicker">Workflow. Follow-up. Growth.</p>
+            <p className="wms-kicker">AI automation for small business</p>
             <h1 className="wms-display mt-6 max-w-[680px]">
-              Build the system that turns leads into <span className="text-[#39d5f6]">booked work.</span>
+              Enterprise-level AI and automation.{" "}
+              <span className="text-[#39d5f6]">Built for small business.</span>
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-8 text-[#a7b2b8]">
-              WMS connects your website, CRM, follow-up, automation, AI, and reporting into one
-              operating system for owner-operated service businesses.
+              WMS connects lead generation, CRM, text and voice follow-up, workflows, and reporting
+              into one managed system.
             </p>
             <p className="mt-4 text-base text-[#718087]">
-              Respond faster. Book more work. Run with less chaos.
+              Get enterprise capability without the enterprise cost or complexity.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <WorkflowSnapshotLink>Get my Workflow Snapshot</WorkflowSnapshotLink>
@@ -774,9 +775,9 @@ export function EcosystemExperience() {
               </a>
             </div>
             <div className="mt-10 grid max-w-xl grid-cols-3 border-t border-white/[0.08] pt-5 text-xs text-[#718087]">
-              <span>Respond faster</span>
-              <span className="border-l border-white/[0.08] pl-4">More booked work</span>
-              <span className="border-l border-white/[0.08] pl-4">Run with less chaos</span>
+              <span>Capture every lead</span>
+              <span className="border-l border-white/[0.08] pl-4">Automate follow-up</span>
+              <span className="border-l border-white/[0.08] pl-4">See the whole workflow</span>
             </div>
           </div>
           <div className="pb-5">
