@@ -76,7 +76,7 @@ export default function Image() {
               letterSpacing: 0,
             }}
           >
-            Enterprise-level AI and automation. Built for small business.
+            Enterprise AI and automation. Built for small business.
           </div>
           <div
             style={{
