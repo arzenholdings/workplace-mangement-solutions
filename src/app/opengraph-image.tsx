@@ -64,7 +64,7 @@ export default function Image() {
               textTransform: "uppercase",
             }}
           >
-            Workflow. Follow-up. Growth.
+            AI Automation for Small Business
           </div>
           <div
             style={{
@@ -76,7 +76,7 @@ export default function Image() {
               letterSpacing: 0,
             }}
           >
-            Build the system that turns leads into booked work.
+            Enterprise-level AI and automation. Built for small business.
           </div>
           <div
             style={{
@@ -87,8 +87,7 @@ export default function Image() {
               lineHeight: 1.35,
             }}
           >
-            WMS connects your website, CRM, follow-up, automation, AI, and
-            reporting into one operating system for owner-operated service businesses.
+            Enterprise capability without the enterprise cost or complexity.
           </div>
         </div>
       </div>
