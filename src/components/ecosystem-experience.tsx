@@ -811,11 +811,11 @@ export function EcosystemExperience() {
             kicker="Managed implementation"
             title={
               <>
-                We do not just give you software.{" "}
-                <span className="text-[#39d5f6]">We help you implement it.</span>
+                We don&apos;t just deliver software.{" "}
+                <span className="text-[#39d5f6]">We put it to work.</span>
               </>
             }
-            copy="Most software companies hand you a login and wish you luck. We do the opposite."
+            copy="WMS configures the system around your workflow, connects the tools, and helps your team use it confidently."
           />
           <div className="mt-14 grid gap-px overflow-hidden rounded-xl border border-[#1a292f] bg-[#1a292f] md:grid-cols-2 lg:grid-cols-4">
             {implementationSteps.map((step, index) => {
