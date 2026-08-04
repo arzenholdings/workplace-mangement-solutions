@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site";
 
 export const alt =
-  "Workplace Management Solutions CRM, automation, and lead follow-up";
+  "Workplace Management Solutions AI automation for small business";
 
 export const size = {
   width: 1200,
