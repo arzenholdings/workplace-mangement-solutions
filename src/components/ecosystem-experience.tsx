@@ -768,6 +768,9 @@ export function EcosystemExperience() {
             <p className="mt-4 text-base text-[#718087]">
               Get enterprise capability without the enterprise cost or complexity.
             </p>
+            <p className="mt-2 text-base font-medium text-[#c9d1d5]">
+              Respond faster. Book more work. Run with less chaos.
+            </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <WorkflowSnapshotLink>Get my Workflow Snapshot</WorkflowSnapshotLink>
               <a href="#process" className="wms-button-secondary">
@@ -789,14 +792,14 @@ export function EcosystemExperience() {
       <section id="how-we-help" className="wms-section">
         <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
           <SectionHeading
-            kicker="The revenue leak"
+            kicker="Connected operations"
             title={
               <>
-                Your business does not need more software.{" "}
-                <span className="text-[#39d5f6]">It needs a system.</span>
+                Your tools should work together.{" "}
+                <span className="text-[#39d5f6]">Your business should work better.</span>
               </>
             }
-            copy="Every missed call, forgotten estimate, disconnected form, and manual handoff creates another place for revenue to disappear."
+            copy="WMS connects every lead, conversation, estimate, appointment, and follow-up so your team always knows what happens next."
           />
           <WorkflowLeakConsole />
         </div>
