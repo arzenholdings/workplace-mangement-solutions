@@ -22,7 +22,7 @@ export const siteConfig = {
     formatted: "14205 SE 36th St, Bellevue, WA 98006",
   },
   description:
-    "WMS brings enterprise-level AI and automation to small businesses without the enterprise cost or complexity.",
+    "WMS brings modern enterprise solutions to small businesses without the enterprise cost or complexity.",
   socialDescription:
-    "Enterprise AI and automation built for small business. WMS connects lead generation, CRM, follow-up, workflows, and reporting into one managed system.",
+    "Modern enterprise solutions built for small business. WMS connects marketing, CRM, automation, communication, workflows, and reporting into one managed system.",
 };
