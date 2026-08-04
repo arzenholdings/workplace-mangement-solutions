@@ -137,6 +137,29 @@ const outcomes = [
   { title: "Fewer disconnected tools", icon: Network },
 ];
 
+const accountabilityItems: IconItem[] = [
+  {
+    title: "Clear assignments",
+    copy: "Every agent and team member has a defined job, owner, and expected result.",
+    icon: UserCheck,
+  },
+  {
+    title: "Visible activity",
+    copy: "Actions, handoffs, and completed work stay visible instead of disappearing into a black box.",
+    icon: BarChart3,
+  },
+  {
+    title: "Human review",
+    copy: "Exceptions and high-impact decisions are surfaced when a person needs to step in.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Measured results",
+    copy: "Performance is reviewed against the outcome the agent was assigned to produce.",
+    icon: Gauge,
+  },
+];
+
 const leadOfferPoints = [
   {
     title: "Qualified home-service companies",
@@ -848,6 +871,35 @@ export function EcosystemExperience() {
       </section>
 
       <FounderLedSection />
+
+      <section className="wms-section wms-section-alt border-y border-white/[0.06]">
+        <div className="mx-auto max-w-[1180px]">
+          <SectionHeading
+            kicker="Accountability built in"
+            title={
+              <>
+                Every agent gets a job.{" "}
+                <span className="text-[#39d5f6]">Every result gets checked.</span>
+              </>
+            }
+            copy="WMS tracks what was assigned, what was completed, what needs review, and when a human should step in."
+          />
+          <div className="mt-14 grid gap-px overflow-hidden rounded-xl border border-[#1a292f] bg-[#1a292f] md:grid-cols-2 lg:grid-cols-4">
+            {accountabilityItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article key={item.title} className="bg-[#0d1418] p-6">
+                  <span className="grid h-10 w-10 place-items-center rounded-lg border border-[#27414b] bg-[#111b20] text-[#73e4fa]">
+                    <Icon className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <h3 className="wms-card-title mt-8">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-[#8d9ba2]">{item.copy}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       <section id="operating-system" className="wms-section scroll-mt-20">
         <div className="mx-auto max-w-[1180px]">
