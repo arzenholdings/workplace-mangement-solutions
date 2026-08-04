@@ -24,5 +24,5 @@ export const siteConfig = {
   description:
     "WMS brings enterprise-level AI and automation to small businesses without the enterprise cost or complexity.",
   socialDescription:
-    "Enterprise-level AI and automation built for small business. WMS connects lead generation, CRM, follow-up, workflows, and reporting into one managed system.",
+    "Enterprise AI and automation built for small business. WMS connects lead generation, CRM, follow-up, workflows, and reporting into one managed system.",
 };
