@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   referrer: "origin-when-cross-origin",
   title: {
-    default: "Workplace Management Solutions | CRM, Automation and Lead Follow-Up",
+    default: "Workplace Management Solutions | AI Automation for Small Business",
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   category: "business services",
   openGraph: {
-    title: "Workplace Management Solutions | CRM, Automation and Lead Follow-Up",
+    title: "Workplace Management Solutions | AI Automation for Small Business",
     description: siteConfig.socialDescription,
     url: "/",
     siteName: siteConfig.name,
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Workplace Management Solutions | CRM, Automation and Lead Follow-Up",
+    title: "Workplace Management Solutions | AI Automation for Small Business",
     description: siteConfig.socialDescription,
     images: ["/twitter-image"],
   },
