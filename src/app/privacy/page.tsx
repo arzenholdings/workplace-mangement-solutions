@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { WmsBrandLogo } from "@/components/wms-brand-logo";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -15,11 +16,7 @@ export default function PrivacyPage() {
       <div className="mx-auto max-w-4xl">
         <header className="flex items-center justify-between border-b border-white/[0.07] pb-4">
           <Link href="/" className="flex items-center gap-3" aria-label={`${siteConfig.name} home`}>
-            <span className="wms-logo-mark">
-              <Sparkles className="h-4 w-4" />
-            </span>
-            <span className="hidden text-sm font-semibold sm:block">{siteConfig.name}</span>
-            <span className="text-sm font-semibold sm:hidden">{siteConfig.shortName}</span>
+            <WmsBrandLogo priority />
           </Link>
           <Link href="/" className="wms-button-secondary min-h-11 px-4">
             <ArrowLeft className="h-4 w-4" />

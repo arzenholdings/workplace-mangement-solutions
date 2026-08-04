@@ -6,6 +6,7 @@ import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { InteractiveDotGrid } from "@/components/interactive-dot-grid";
+import { WmsBrandLogo } from "@/components/wms-brand-logo";
 import { siteConfig } from "@/lib/site";
 import {
   ArrowRight,
@@ -28,7 +29,6 @@ import {
   RefreshCw,
   Route,
   ShieldCheck,
-  Sparkles,
   UserCheck,
   UsersRound,
   Workflow,
@@ -249,17 +249,7 @@ const faqItems = [
 ];
 
 function WmsMark({ compact = false }: { compact?: boolean }) {
-  return (
-    <span className="flex min-w-0 items-center gap-3">
-      <span className="wms-logo-mark">
-        <Sparkles className="h-4 w-4" aria-hidden="true" />
-      </span>
-      <span className={compact ? "text-sm font-semibold" : "hidden text-sm font-semibold sm:block"}>
-        {compact ? "WMS" : "Workplace Management Solutions"}
-      </span>
-      {!compact && <span className="text-sm font-semibold sm:hidden">WMS</span>}
-    </span>
-  );
+  return <WmsBrandLogo footer={compact} priority={!compact} />;
 }
 
 function Header() {
