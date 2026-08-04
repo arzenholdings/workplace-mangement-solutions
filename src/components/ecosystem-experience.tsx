@@ -779,13 +779,13 @@ export function EcosystemExperience() {
         <InteractiveDotGrid className="z-[1] [mask-image:radial-gradient(ellipse_at_center,black_42%,transparent_98%)]" />
         <div className="relative z-10 mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
           <div>
-            <p className="wms-kicker">AI automation for small business</p>
+            <p className="wms-kicker">Modern systems for small business</p>
             <h1 className="wms-display mt-6 max-w-[680px]">
-              Enterprise AI and automation.{" "}
+              Modern enterprise solutions.{" "}
               <span className="text-[#39d5f6]">Built for small business.</span>
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-8 text-[#a7b2b8]">
-              WMS connects lead generation, CRM, text and voice follow-up, workflows, and reporting
+              WMS connects marketing, CRM, automation, communication, workflows, and reporting
               into one managed system.
             </p>
             <p className="mt-4 text-base text-[#718087]">
