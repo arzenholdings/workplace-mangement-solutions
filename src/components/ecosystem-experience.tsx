@@ -140,7 +140,7 @@ const outcomes = [
 const accountabilityItems: IconItem[] = [
   {
     title: "Clear assignments",
-    copy: "Every agent and team member has a defined job, owner, and expected result.",
+    copy: "Every task has a defined owner, objective, and expected result.",
     icon: UserCheck,
   },
   {
@@ -155,7 +155,7 @@ const accountabilityItems: IconItem[] = [
   },
   {
     title: "Measured results",
-    copy: "Performance is reviewed against the outcome the agent was assigned to produce.",
+    copy: "Performance is reviewed against the outcome the workflow was designed to produce.",
     icon: Gauge,
   },
 ];
@@ -781,7 +781,7 @@ export function EcosystemExperience() {
           <div>
             <p className="wms-kicker">AI automation for small business</p>
             <h1 className="wms-display mt-6 max-w-[680px]">
-              Enterprise-level AI and automation.{" "}
+              Enterprise AI and automation.{" "}
               <span className="text-[#39d5f6]">Built for small business.</span>
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-8 text-[#a7b2b8]">
@@ -878,8 +878,8 @@ export function EcosystemExperience() {
             kicker="Accountability built in"
             title={
               <>
-                Every agent gets a job.{" "}
-                <span className="text-[#39d5f6]">Every result gets checked.</span>
+                Every task has an owner.{" "}
+                <span className="text-[#39d5f6]">Every result is measured and reviewed.</span>
               </>
             }
             copy="WMS tracks what was assigned, what was completed, what needs review, and when a human should step in."
