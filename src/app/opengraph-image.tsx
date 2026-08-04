@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site";
 
 export const alt =
-  "Workplace Management Solutions AI automation for small business";
+  "Workplace Management Solutions modern enterprise solutions for small business";
 
 export const size = {
   width: 1200,
@@ -64,7 +64,7 @@ export default function Image() {
               textTransform: "uppercase",
             }}
           >
-            AI Automation for Small Business
+            Modern Systems for Small Business
           </div>
           <div
             style={{
@@ -76,7 +76,7 @@ export default function Image() {
               letterSpacing: 0,
             }}
           >
-            Enterprise AI and automation. Built for small business.
+            Modern enterprise solutions. Built for small business.
           </div>
           <div
             style={{
