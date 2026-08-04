@@ -1,910 +1,1131 @@
 "use client";
 
-import { useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
+import { useState } from "react";
+import { InteractiveDotGrid } from "@/components/interactive-dot-grid";
+import { siteConfig } from "@/lib/site";
 import {
   ArrowRight,
+  BarChart3,
+  Blocks,
   Bot,
-  BrainCircuit,
-  Building2,
-  Calculator,
-  ChartNoAxesCombined,
-  Cloud,
-  Database,
-  FileSpreadsheet,
-  MessageSquare,
+  CalendarCheck2,
+  Check,
+  CheckCircle2,
+  ChevronDown,
+  CircleDotDashed,
+  Clock3,
+  Gauge,
+  Headphones,
+  Menu,
+  MessageSquareText,
   Network,
-  RadioTower,
+  PhoneCall,
+  Radar,
+  RefreshCw,
   Route,
-  ShoppingBag,
+  ShieldCheck,
   Sparkles,
-  Store,
+  UserCheck,
+  UsersRound,
+  Workflow,
+  X,
   Zap,
-  type LucideIcon,
 } from "lucide-react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from "framer-motion";
 
-type Module = {
-  name: string;
-  short: string;
-  icon: LucideIcon;
-  angle: number;
-  radius: number;
-  depth: number;
-  color: string;
-  group: "systems" | "teams" | "commerce" | "data";
-};
-
-type Story = {
-  kicker: string;
+type IconItem = {
   title: string;
   copy: string;
+  icon: LucideIcon;
 };
 
-const modules: Module[] = [
+const problems: IconItem[] = [
   {
-    name: "AI Agents",
-    short: "Agents",
-    icon: Bot,
-    angle: -88,
-    radius: 0.38,
-    depth: 1.1,
-    color: "#67e8f9",
-    group: "systems",
-  },
-  {
-    name: "CRM",
-    short: "CRM",
-    icon: Building2,
-    angle: -130,
-    radius: 0.56,
-    depth: 0.86,
-    color: "#5eead4",
-    group: "systems",
-  },
-  {
-    name: "QuickBooks",
-    short: "Books",
-    icon: Calculator,
-    angle: -48,
-    radius: 0.58,
-    depth: 0.9,
-    color: "#86efac",
-    group: "systems",
-  },
-  {
-    name: "Salesforce",
-    short: "Sales",
-    icon: Cloud,
-    angle: -178,
-    radius: 0.69,
-    depth: 0.74,
-    color: "#7dd3fc",
-    group: "systems",
-  },
-  {
-    name: "Excel",
-    short: "Excel",
-    icon: FileSpreadsheet,
-    angle: 128,
-    radius: 0.58,
-    depth: 0.88,
-    color: "#bef264",
-    group: "data",
-  },
-  {
-    name: "Shopify",
-    short: "Shopify",
-    icon: Store,
-    angle: 55,
-    radius: 0.6,
-    depth: 0.86,
-    color: "#4ade80",
-    group: "commerce",
-  },
-  {
-    name: "Amazon",
-    short: "Amazon",
-    icon: ShoppingBag,
-    angle: 11,
-    radius: 0.69,
-    depth: 0.72,
-    color: "#fbbf24",
-    group: "commerce",
-  },
-  {
-    name: "Slack",
-    short: "Slack",
-    icon: MessageSquare,
-    angle: 178,
-    radius: 0.42,
-    depth: 1,
-    color: "#c084fc",
-    group: "teams",
-  },
-  {
-    name: "Teams",
-    short: "Teams",
-    icon: RadioTower,
-    angle: 0,
-    radius: 0.44,
-    depth: 1,
-    color: "#a5b4fc",
-    group: "teams",
-  },
-  {
-    name: "Linear",
-    short: "Linear",
+    title: "Missed opportunities",
+    copy: "Calls go unanswered, forms sit too long, and prospects move on.",
     icon: Route,
-    angle: 150,
-    radius: 0.78,
-    depth: 0.66,
-    color: "#d8b4fe",
-    group: "data",
   },
   {
-    name: "Supabase",
-    short: "Data",
-    icon: Database,
-    angle: 90,
-    radius: 0.74,
-    depth: 0.72,
-    color: "#6ee7b7",
-    group: "data",
+    title: "Disconnected tools",
+    copy: "Your website, inbox, CRM, calendar, phone, and reporting do not share one workflow.",
+    icon: Network,
   },
   {
-    name: "Vercel",
-    short: "Deploy",
-    icon: Zap,
-    angle: 31,
-    radius: 0.82,
-    depth: 0.65,
-    color: "#f8fafc",
-    group: "data",
+    title: "Owner bottleneck",
+    copy: "Follow-up, approvals, and decisions still depend on what the owner remembers.",
+    icon: MessageSquareText,
   },
   {
-    name: "Dashboards",
-    short: "Dash",
-    icon: ChartNoAxesCombined,
-    angle: 96,
-    radius: 0.44,
-    depth: 1,
-    color: "#22d3ee",
-    group: "data",
+    title: "Slow follow-up",
+    copy: "Missed calls, open estimates, and old leads stop moving when next steps rely on memory.",
+    icon: RefreshCw,
   },
 ];
 
-const stories: Story[] = [
+const capabilities = [
   {
-    kicker: "01 / Signal",
-    title: "Your operation becomes visible.",
-    copy: "Finance, sales, service, data, and team activity move into one live operating field.",
+    title: "Capture",
+    copy: "Bring calls, forms, chat, ads, and referrals into one visible pipeline.",
+    signal: "Calls, forms, chat, ads, referrals",
+    icon: Radar,
   },
   {
-    kicker: "02 / Orbit",
-    title: "Every platform keeps its role.",
-    copy: "WMS connects the tools you already trust without forcing a rip and replace program.",
+    title: "Respond",
+    copy: "Text and email new leads while the opportunity is still active.",
+    signal: "Text and email new leads",
+    icon: MessageSquareText,
   },
   {
-    kicker: "03 / Intelligence",
-    title: "AI agents move through governed paths.",
-    copy: "Agents triage, draft, route, reconcile, and escalate with business context around every action.",
+    title: "Book",
+    copy: "Give customers a clear next step and move appointments onto the calendar.",
+    signal: "Appointments on the calendar",
+    icon: CalendarCheck2,
   },
   {
-    kicker: "04 / Command",
-    title: "Leaders see the system breathing.",
-    copy: "Dashboards shift from rearview reports into a working layer for decisions and accountability.",
+    title: "Follow up",
+    copy: "Keep missed calls, open estimates, and old leads moving without relying on memory.",
+    signal: "Missed calls, open estimates, old leads",
+    icon: Workflow,
   },
   {
-    kicker: "05 / Modernize",
-    title: "The new operating layer is built to scale.",
-    copy: "Workflow design, reporting, integrations, and infrastructure become one durable business system.",
+    title: "Report",
+    copy: "See what is working, what is stuck, and where the business is losing momentum.",
+    signal: "What works, what is stuck",
+    icon: BarChart3,
+  },
+  {
+    title: "Improve",
+    copy: "Use automation and AI where they remove work, not where they add complexity.",
+    signal: "Automation and AI",
+    icon: Bot,
+  },
+  {
+    title: "Operate",
+    copy: "Connect people, ownership, tools, and reporting so the business is easier to run.",
+    signal: "One business operating system",
+    icon: UsersRound,
   },
 ];
 
-const services = [
-  "AI Automation",
-  "Operational Reporting",
-  "Systems Integration",
-  "Workflow Design",
-  "Infrastructure Modernization",
+const process = [
+  ["01", "Diagnose", "Complete the Workflow Snapshot and identify the highest-value bottleneck."],
+  [
+    "02",
+    "Build",
+    "WMS configures the page, CRM, pipeline, follow-up, automation, and reporting.",
+  ],
+  [
+    "03",
+    "Launch",
+    "Your system begins capturing, responding to, and moving opportunities forward.",
+  ],
+  ["04", "Review", "We review the results and repair weak points."],
+  ["05", "Improve", "Expand what works."],
 ];
 
-const proofPoints = [
-  ["42%", "faster exception handling"],
-  ["18 hrs", "saved per reporting cycle"],
-  ["31%", "higher on-time completion"],
+const outcomes = [
+  { title: "Faster lead response", icon: Clock3 },
+  { title: "Fewer missed follow-ups", icon: CheckCircle2 },
+  { title: "Clearer pipeline ownership", icon: UserCheck },
+  { title: "Reduced repetitive work", icon: RefreshCw },
+  { title: "Better management visibility", icon: Gauge },
+  { title: "More consistent execution", icon: ShieldCheck },
+  { title: "Easier employee onboarding", icon: UsersRound },
+  { title: "Fewer disconnected tools", icon: Network },
 ];
 
-const groupVisibility = {
-  systems: [0.11, 0.22],
-  teams: [0.21, 0.33],
-  commerce: [0.32, 0.44],
-  data: [0.42, 0.56],
-} satisfies Record<Module["group"], [number, number]>;
+const accountabilityItems: IconItem[] = [
+  {
+    title: "Clear assignments",
+    copy: "Every task has a defined owner, objective, and expected result.",
+    icon: UserCheck,
+  },
+  {
+    title: "Visible activity",
+    copy: "Actions, handoffs, and completed work stay visible instead of disappearing into a black box.",
+    icon: BarChart3,
+  },
+  {
+    title: "Human review",
+    copy: "Exceptions and high-impact decisions are surfaced when a person needs to step in.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Measured results",
+    copy: "Performance is reviewed against the outcome the workflow was designed to produce.",
+    icon: Gauge,
+  },
+];
 
-function polarToPoint(angle: number, radius: number) {
-  const radians = (angle * Math.PI) / 180;
-  const toFixedPoint = (value: number) => Number(value.toFixed(3));
+const leadOfferPoints = [
+  {
+    title: "Qualified home-service companies",
+    copy: "Built for companies with the capacity to answer, book, and serve more customers.",
+  },
+  { title: "One defined market", copy: "One defined market." },
+  { title: "One focused campaign", copy: "One focused campaign." },
+  {
+    title: "One measurable seven-day sprint",
+    copy: "One measurable seven-day sprint.",
+  },
+];
 
-  return {
-    x: toFixedPoint(50 + Math.cos(radians) * radius * 45),
-    y: toFixedPoint(50 + Math.sin(radians) * radius * 45),
-  };
-}
+const systemGroups = [
+  {
+    title: "Lead intake",
+    icon: PhoneCall,
+    items: ["Missed-call response", "Lead capture", "Website and funnel support"],
+  },
+  {
+    title: "Conversation and booking",
+    icon: Headphones,
+    items: ["Automated follow-up", "Appointment booking", "Human escalation"],
+  },
+  {
+    title: "Visibility and optimization",
+    icon: Gauge,
+    items: [
+      "CRM organization",
+      "Pipeline visibility",
+      "Workflow automation",
+      "Reporting",
+      "Ongoing optimization",
+    ],
+  },
+];
 
-function useSceneValue<T>(
-  progress: MotionValue<number>,
-  values: T[],
-): MotionValue<T> {
-  return useTransform(progress, [0, 0.22, 0.44, 0.66, 0.84], values);
-}
+const implementationSteps = [
+  {
+    label: "Diagnose",
+    copy: "Find the highest-value bottleneck before adding another tool.",
+    icon: Radar,
+  },
+  {
+    label: "Configure",
+    copy: "WMS configures the page, CRM, pipeline, follow-up, automation, and reporting.",
+    icon: Blocks,
+  },
+  {
+    label: "Connect",
+    copy: "Connect people, ownership, tools, and reporting so the business is easier to run.",
+    icon: Network,
+  },
+  {
+    label: "Improve",
+    copy: "We review the results, repair weak points, and expand what works.",
+    icon: RefreshCw,
+  },
+];
 
-function SceneCopyPanel({
-  progress,
-  story,
-  storyIndex,
-}: {
-  progress: MotionValue<number>;
-  story: Story;
-  storyIndex: number;
-}) {
-  const center = storyIndex === 0 ? 0.04 : storyIndex * 0.2;
-  const start = Math.max(0, center - 0.08);
-  const end = Math.min(1, storyIndex * 0.2 + 0.18);
-  const opacity = useTransform(
-    progress,
-    [start, center, end],
-    [0, 1, storyIndex === stories.length - 1 ? 1 : 0],
+const faqItems = [
+  {
+    question: "How long does setup take?",
+    answer:
+      "With our done-for-you setup, you can be up and running in less than 24 hours. Your 1-on-1 kickoff call takes about 45 minutes.",
+  },
+  {
+    question: "Do I need technical skills?",
+    answer:
+      "Not at all. We handle all the technical setup for you, and the platform is designed to be incredibly easy to use from your phone or computer.",
+  },
+  {
+    question: "Can I keep my current website?",
+    answer:
+      "Yes! While we offer a professional website as part of the package, you can easily integrate our AI chat widget and automations into your existing site.",
+  },
+  {
+    question: "Can AI really book appointments?",
+    answer:
+      "Yes. Our conversational AI is trained on your specific services, pricing, and availability. It can answer questions and book appointments directly into your calendar without human intervention.",
+  },
+  {
+    question: "Is there a contract?",
+    answer:
+      "No. Our monthly plan is month-to-month, and you can cancel anytime. We also offer an annual plan for those who want to save on two months.",
+  },
+];
+
+function WmsMark({ compact = false }: { compact?: boolean }) {
+  return (
+    <span className="flex min-w-0 items-center gap-3">
+      <span className="wms-logo-mark">
+        <Sparkles className="h-4 w-4" aria-hidden="true" />
+      </span>
+      <span className={compact ? "text-sm font-semibold" : "hidden text-sm font-semibold sm:block"}>
+        {compact ? "WMS" : "Workplace Management Solutions"}
+      </span>
+      {!compact && <span className="text-sm font-semibold sm:hidden">WMS</span>}
+    </span>
   );
-  const y = useTransform(progress, [start, center, end], [26, 0, -18]);
+}
+
+function Header() {
+  const [open, setOpen] = useState(false);
+  const links = [
+    ["Solutions", "#operating-system"],
+    ["How it works", "#process"],
+    ["25 Leads in 7 Days", "https://try.workplacemgtsolutions.com"],
+    ["Client login", "https://app.workplacemgtsolutions.com"],
+  ];
 
   return (
-    <motion.div
-      className="absolute left-0 top-0"
-      style={{ opacity, y }}
-    >
-      <p className="font-mono text-xs uppercase tracking-[0.32em] text-cyan-100/75">
-        {story.kicker}
-      </p>
-      <h2 className="mt-5 max-w-2xl text-4xl font-semibold leading-[0.98] text-white sm:text-5xl lg:text-6xl">
-        {story.title}
-      </h2>
-      <p className="mt-5 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
-        {story.copy}
-      </p>
-    </motion.div>
-  );
-}
-
-function SceneCopy({ progress }: { progress: MotionValue<number> }) {
-  const index = useTransform(progress, [0, 0.2, 0.4, 0.6, 0.8], [0, 1, 2, 3, 4]);
-
-  return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 top-0 z-30 mx-auto flex h-full max-w-7xl items-start px-5 pt-24 sm:px-8 lg:px-10 lg:pt-28"
-    >
-      <div className="relative h-48 w-full max-w-xl">
-        {stories.map((story, storyIndex) => (
-          <SceneCopyPanel
-            key={story.title}
-            progress={progress}
-            story={story}
-            storyIndex={storyIndex}
-          />
-        ))}
-        <motion.div
-          className="absolute -bottom-10 left-0 h-px w-64 bg-gradient-to-r from-cyan-200 via-teal-200 to-transparent"
-          style={{
-            scaleX: useTransform(index, [0, 4], [0.35, 1]),
-            transformOrigin: "left",
-          }}
-        />
-      </div>
-    </div>
-  );
-}
-
-function Particles({
-  disabled,
-  progress,
-}: {
-  disabled: boolean;
-  progress: MotionValue<number>;
-}) {
-  const drift = useTransform(progress, [0, 1], [-80, 120]);
-
-  return (
-    <motion.div
-      className="absolute inset-0 z-0 overflow-hidden opacity-80"
-      style={{ y: drift }}
-      aria-hidden="true"
-    >
-      {Array.from({ length: disabled ? 12 : 22 }).map((_, index) => {
-        const left = (index * 37) % 100;
-        const top = (index * 53) % 100;
-        const size = 2 + (index % 4);
-        return (
-          <motion.span
-            key={left + top + index}
-            className="absolute rounded-full bg-cyan-100/60 shadow-[0_0_18px_rgba(103,232,249,0.85)] will-change-transform"
-            style={{
-              left: `${left}%`,
-              top: `${top}%`,
-              height: size,
-              width: size,
-            }}
-            animate={
-              disabled
-                ? undefined
-                : {
-                    opacity: [0.1, 0.85, 0.2],
-                    scale: [0.7, 1.3, 0.8],
-                  }
-            }
-            transition={{
-              duration: 4 + (index % 7) * 0.45,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: index * 0.11,
-            }}
-          />
-        );
-      })}
-    </motion.div>
-  );
-}
-
-function ConnectionField({
-  progress,
-  disabled,
-}: {
-  progress: MotionValue<number>;
-  disabled: boolean;
-}) {
-  const pathOpacity = useTransform(progress, [0.12, 0.32, 0.66], [0, 0.55, 0.9]);
-  const pathLength = useTransform(progress, [0.08, 0.48], [0.05, 1]);
-  const pulseOffset = useTransform(progress, [0.22, 0.92], [340, 0]);
-
-  return (
-    <svg
-      aria-hidden="true"
-      className="absolute inset-0 z-10 h-full w-full"
-      preserveAspectRatio="none"
-      viewBox="0 0 100 100"
-    >
-      <defs>
-        <radialGradient id="wmsNodeGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="rgba(103,232,249,0.8)" />
-          <stop offset="100%" stopColor="rgba(103,232,249,0)" />
-        </radialGradient>
-        <linearGradient id="wmsLineGradient" x1="0%" x2="100%" y1="0%" y2="100%">
-          <stop offset="0%" stopColor="rgba(103,232,249,0.1)" />
-          <stop offset="40%" stopColor="rgba(45,212,191,0.85)" />
-          <stop offset="100%" stopColor="rgba(196,181,253,0.28)" />
-        </linearGradient>
-        <filter id="wmsGlow">
-          <feGaussianBlur stdDeviation="0.7" result="coloredBlur" />
-          <feMerge>
-            <feMergeNode in="coloredBlur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-
-      <circle cx="50" cy="50" fill="url(#wmsNodeGlow)" opacity="0.24" r="13" />
-
-      {modules.map((module) => {
-        const point = polarToPoint(module.angle, module.radius);
-        const controlX = 50 + (point.x - 50) * 0.45;
-        const controlY = 50 + (point.y - 50) * 0.18;
-        return (
-          <g key={module.name}>
-            <motion.path
-              d={`M 50 50 Q ${controlX} ${controlY} ${point.x} ${point.y}`}
-              fill="none"
-              filter="url(#wmsGlow)"
-              pathLength="1"
-              stroke="url(#wmsLineGradient)"
-              strokeLinecap="round"
-              strokeWidth="0.18"
-              style={{ opacity: pathOpacity, pathLength }}
-            />
-            {!disabled && (
-              <motion.path
-                d={`M 50 50 Q ${controlX} ${controlY} ${point.x} ${point.y}`}
-                fill="none"
-                pathLength="1"
-                stroke={module.color}
-                strokeDasharray="8 332"
-                strokeLinecap="round"
-                strokeWidth="0.32"
-                style={{
-                  opacity: pathOpacity,
-                  strokeDashoffset: pulseOffset,
-                }}
-              />
-            )}
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
-function OrbitModule({
-  module,
-  index,
-  progress,
-  disabled,
-}: {
-  module: Module;
-  index: number;
-  progress: MotionValue<number>;
-  disabled: boolean;
-}) {
-  const point = polarToPoint(module.angle, module.radius);
-  const visibility = groupVisibility[module.group];
-  const opacity = useTransform(progress, [visibility[0], visibility[1]], [0, 1]);
-  const scale = useTransform(progress, [visibility[0], visibility[1], 0.78], [0.5, 1, 1.08]);
-  const x = useTransform(
-    progress,
-    [0, 0.72, 1],
-    [0, (point.x - 50) * 8, (point.x - 50) * 11.5],
-  );
-  const y = useTransform(
-    progress,
-    [0, 0.72, 1],
-    [0, (point.y - 50) * 5.6, (point.y - 50) * 7.4],
-  );
-  const Icon = module.icon;
-
-  return (
-    <motion.div
-      className="absolute left-1/2 top-1/2 z-20 will-change-transform"
-      data-module={module.name}
-      style={{
-        x,
-        y,
-        opacity,
-        scale,
-        translate: "-50% -50%",
-      }}
-    >
-      <motion.div
-        className="flex items-center gap-2 rounded-2xl border px-3 py-2 text-xs font-medium backdrop-blur-xl sm:px-4 sm:py-3 sm:text-sm"
-        style={{
-          borderColor: `${module.color}66`,
-          background: `linear-gradient(135deg, ${module.color}20, rgba(2,6,23,0.72))`,
-          boxShadow: `0 0 ${18 + module.depth * 10}px ${module.color}22`,
-        }}
-        animate={
-          disabled
-            ? undefined
-            : {
-                rotate: [0, index % 2 === 0 ? 1.4 : -1.4, 0],
-                y: [0, -6 * module.depth, 0],
-              }
-        }
-        transition={{
-          duration: 5.5 + index * 0.18,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: index * 0.07,
-        }}
-      >
-        <Icon className="h-4 w-4 shrink-0" style={{ color: module.color }} />
-        <span className="hidden text-white/95 sm:block">{module.name}</span>
-        <span className="text-white/95 sm:hidden">{module.short}</span>
-      </motion.div>
-    </motion.div>
-  );
-}
-
-function CentralCore({
-  progress,
-  disabled,
-}: {
-  progress: MotionValue<number>;
-  disabled: boolean;
-}) {
-  const coreScale = useTransform(progress, [0, 0.22, 0.55, 0.88], [0.8, 1, 1.16, 0.92]);
-  const coreY = useTransform(progress, [0, 0.4, 0.78], [74, 0, -10]);
-  const coreRotate = useTransform(progress, [0, 1], [-18, 18]);
-  const glowOpacity = useTransform(progress, [0, 0.4, 0.8], [0.18, 0.52, 0.72]);
-
-  return (
-    <motion.div
-      className="absolute left-1/2 top-1/2 z-20 grid h-56 w-56 place-items-center rounded-full will-change-transform sm:h-72 sm:w-72 lg:h-80 lg:w-80"
-      style={{
-        scale: coreScale,
-        y: coreY,
-        rotate: coreRotate,
-        translate: "-50% -50%",
-      }}
-    >
-      <motion.div
-        className="absolute inset-0 rounded-full bg-cyan-300 blur-3xl"
-        style={{ opacity: glowOpacity }}
-      />
-      <motion.div
-        className="absolute inset-4 rounded-full border border-cyan-100/30"
-        animate={disabled ? undefined : { rotate: 360 }}
-        transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="absolute inset-10 rounded-full border border-teal-100/20"
-        animate={disabled ? undefined : { rotate: -360 }}
-        transition={{ duration: 44, repeat: Infinity, ease: "linear" }}
-      />
-      <div className="relative grid h-36 w-36 place-items-center rounded-[2rem] border border-cyan-100/35 bg-slate-950/80 shadow-2xl shadow-cyan-400/30 backdrop-blur-xl sm:h-44 sm:w-44">
-        <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_50%_0%,rgba(103,232,249,0.32),transparent_58%)]" />
-        <BrainCircuit className="relative h-10 w-10 text-cyan-100 sm:h-12 sm:w-12" />
-        <div className="relative text-center">
-          <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-cyan-100/70">
-            WMS
-          </p>
-          <p className="mt-2 text-sm font-semibold text-white sm:text-base">
-            Operations Core
-          </p>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function EcosystemStage({ progress }: { progress: MotionValue<number> }) {
-  const reducedMotion = useReducedMotion();
-  const worldScale = useTransform(progress, [0, 0.35, 0.72, 1], [0.72, 0.96, 1.08, 1.22]);
-  const worldY = useTransform(progress, [0, 0.45, 1], [100, 0, -72]);
-  const worldX = useTransform(progress, [0, 0.5, 1], ["0vw", "2vw", "4vw"]);
-  const backgroundX = useTransform(progress, [0, 1], ["-8%", "8%"]);
-  const layerOne = useTransform(progress, [0, 1], [-50, 70]);
-  const layerTwo = useTransform(progress, [0, 1], [90, -100]);
-  const vignetteOpacity = useTransform(progress, [0, 0.5, 1], [0.45, 0.1, 0.5]);
-
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      <motion.div
-        className="absolute -inset-[18%] bg-[radial-gradient(circle_at_24%_22%,rgba(45,212,191,0.2),transparent_28%),radial-gradient(circle_at_72%_30%,rgba(129,140,248,0.22),transparent_25%),radial-gradient(circle_at_50%_76%,rgba(14,165,233,0.18),transparent_32%),linear-gradient(180deg,#030712_0%,#06111d_52%,#020617_100%)]"
-        style={{ x: backgroundX }}
-      />
-      <motion.div
-        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:54px_54px] opacity-25"
-        style={{ y: layerOne }}
-      />
-      <motion.div
-        className="absolute left-1/2 top-1/2 h-[72vmin] w-[72vmin] rounded-full border border-cyan-100/10"
-        style={{ y: layerTwo, translate: "-50% -50%" }}
-      />
-      <motion.div
-        className="absolute left-1/2 top-1/2 h-[94vmin] w-[94vmin] rounded-full border border-violet-100/10"
-        style={{ y: layerOne, translate: "-50% -50%" }}
-      />
-      <Particles disabled={Boolean(reducedMotion)} progress={progress} />
-      <motion.div
-        className="absolute inset-0 z-10 will-change-transform lg:ml-[22vw]"
-        style={{ scale: worldScale, x: worldX, y: worldY }}
-      >
-        <ConnectionField progress={progress} disabled={Boolean(reducedMotion)} />
-        <CentralCore progress={progress} disabled={Boolean(reducedMotion)} />
-        {modules.map((module, index) => (
-          <OrbitModule
-            key={module.name}
-            disabled={Boolean(reducedMotion)}
-            index={index}
-            module={module}
-            progress={progress}
-          />
-        ))}
-      </motion.div>
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-40 bg-[radial-gradient(circle_at_50%_50%,transparent_34%,rgba(2,6,23,0.78)_100%)]"
-        style={{ opacity: vignetteOpacity }}
-      />
-    </div>
-  );
-}
-
-function ProgressDot({
-  progress,
-  index,
-}: {
-  progress: MotionValue<number>;
-  index: number;
-}) {
-  const center = index === 0 ? 0.04 : index * 0.2;
-  const start = Math.max(0, center - 0.06);
-  const end = Math.min(1, center + 0.12);
-  const opacity = useTransform(
-    progress,
-    [start, center, end],
-    [0.35, 1, 0.35],
-  );
-  const scale = useTransform(
-    progress,
-    [start, center, end],
-    [1, 1.8, 1],
-  );
-
-  return (
-    <motion.div
-      className="h-2 w-2 rounded-full bg-white/25"
-      style={{ opacity, scale }}
-    />
-  );
-}
-
-function ProgressRail({ progress }: { progress: MotionValue<number> }) {
-  const scaleY = useTransform(progress, [0, 1], [0, 1]);
-
-  return (
-    <div className="pointer-events-none absolute right-5 top-1/2 z-40 hidden h-56 -translate-y-1/2 items-center gap-4 md:flex">
-      <div className="h-full w-px overflow-hidden rounded-full bg-white/15">
-        <motion.div
-          className="h-full w-full origin-top bg-gradient-to-b from-cyan-200 via-teal-200 to-violet-200"
-          style={{ scaleY }}
-        />
-      </div>
-      <div className="grid gap-4">
-        {stories.map((story, index) => (
-          <ProgressDot key={story.kicker} index={index} progress={progress} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function OpeningHero() {
-  const reducedMotion = useReducedMotion();
-
-  return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden px-5 py-8 sm:px-8 lg:px-10">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(45,212,191,0.2),transparent_30%),radial-gradient(circle_at_78%_62%,rgba(99,102,241,0.18),transparent_32%),linear-gradient(180deg,#05070d_0%,#07111f_76%,#030712_100%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.06),transparent)] opacity-30"
-      />
-      <header className="absolute left-0 right-0 top-0 z-20 mx-auto flex max-w-7xl items-center justify-between px-5 py-6 sm:px-8 lg:px-10">
-        <a
-          aria-label="Workplace Management Solutions home"
-          className="flex items-center gap-3"
-          href="#top"
-        >
-          <span className="grid h-10 w-10 place-items-center rounded-2xl border border-cyan-100/30 bg-white/10 shadow-lg shadow-cyan-400/15 backdrop-blur">
-            <Sparkles className="h-5 w-5 text-cyan-100" />
-          </span>
-          <span className="text-sm font-semibold text-white">WMS</span>
-        </a>
-        <a
-          className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur transition hover:border-cyan-100/50 hover:bg-cyan-100/10"
-          href="#contact"
-        >
-          Book a Call
-        </a>
-      </header>
-      <motion.div
-        className="relative z-10 mx-auto min-w-0 w-full max-w-7xl pt-20"
-        initial={{ opacity: 0, y: 28 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-      >
-        <div className="min-w-0 max-w-4xl">
-          <p className="inline-flex items-center gap-2 rounded-full border border-cyan-100/20 bg-cyan-100/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-cyan-100">
-            <span className="h-2 w-2 rounded-full bg-cyan-200 shadow-[0_0_18px_rgba(103,232,249,0.9)]" />
-            AI operations ecosystem
-          </p>
-          <h1 className="mt-8 max-w-full text-3xl font-semibold leading-tight text-white sm:text-7xl sm:leading-[0.92] lg:text-8xl">
-            Your business systems, moving as one intelligent field.
-          </h1>
-          <p className="mt-8 max-w-2xl text-base leading-8 text-slate-300 sm:text-xl">
-            Workplace Management Solutions modernizes operations with AI agents,
-            automation, reporting, integrations, workflow design, and enterprise
-            infrastructure experience.
-          </p>
-        </div>
-      </motion.div>
-      <motion.a
-        className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-3 text-xs uppercase tracking-[0.28em] text-slate-400"
-        href="#ecosystem"
-        animate={reducedMotion ? undefined : { y: [0, 8, 0] }}
-        transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
-      >
-        Scroll
-        <span className="h-12 w-px bg-gradient-to-b from-cyan-100 to-transparent" />
-      </motion.a>
-    </section>
-  );
-}
-
-function EcosystemNarrative() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-  const phaseLabel = useSceneValue(scrollYProgress, [
-    "Signal",
-    "Orbit",
-    "Intelligence",
-    "Command",
-    "Scale",
-  ]);
-
-  return (
-    <section
-      id="ecosystem"
-      ref={sectionRef}
-      aria-label="AI operations ecosystem narrative"
-      className="relative hidden h-[650vh] md:block"
-    >
-      <div className="sr-only">
-        <h2>AI operations ecosystem narrative</h2>
-        {stories.map((story) => (
-          <article key={story.kicker}>
-            <h3>{story.title}</h3>
-            <p>{story.copy}</p>
-          </article>
-        ))}
-      </div>
-      <div className="sticky top-0 h-screen overflow-hidden">
-        <EcosystemStage progress={scrollYProgress} />
-        <SceneCopy progress={scrollYProgress} />
-        <ProgressRail progress={scrollYProgress} />
-        <div className="absolute bottom-6 left-5 z-40 flex items-center gap-3 rounded-full border border-white/10 bg-slate-950/35 px-4 py-2 text-xs text-slate-300 backdrop-blur sm:left-8 lg:left-10">
-          <Network className="h-4 w-4 text-cyan-100" />
-          <motion.span>{phaseLabel}</motion.span>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function MobileNarrative() {
-  return (
-    <section
-      aria-labelledby="mobile-ecosystem-title"
-      className="relative overflow-hidden px-5 py-20 md:hidden"
-    >
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(45,212,191,0.18),transparent_34%),radial-gradient(circle_at_80%_52%,rgba(129,140,248,0.14),transparent_32%),linear-gradient(180deg,#030712_0%,#07111f_54%,#030712_100%)]"
-      />
-      <div className="relative z-10 mx-auto max-w-xl">
-        <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan-100/75">
-          AI operations ecosystem
-        </p>
-        <h2
-          id="mobile-ecosystem-title"
-          className="mt-5 text-3xl font-semibold leading-tight text-white"
-        >
-          A connected operating layer built around the tools your team already
-          trusts.
-        </h2>
-        <div className="mt-10 grid gap-4">
-          {stories.map((story) => (
-            <article
-              key={story.kicker}
-              className="rounded-3xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur"
+    <header className="sticky top-0 z-50 border-b border-white/[0.07] bg-[#06090b]/90 backdrop-blur-xl">
+      <div className="mx-auto flex h-[68px] max-w-[1180px] items-center justify-between px-5 sm:px-8">
+        <Link href="/" aria-label="Workplace Management Solutions home" className="text-white">
+          <WmsMark />
+        </Link>
+        <nav aria-label="Primary navigation" className="hidden items-center gap-7 lg:flex">
+          {links.map(([label, href]) => (
+            <a
+              key={label}
+              className="text-xs font-medium text-[#a7b2b8] transition hover:text-white"
+              href={href}
             >
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-100/70">
-                {story.kicker}
-              </p>
-              <h3 className="mt-4 text-xl font-semibold leading-tight text-white">
-                {story.title}
-              </h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">
-                {story.copy}
-              </p>
-            </article>
+              {label}
+            </a>
           ))}
-        </div>
+          <Link href="/workflow-snapshot" className="wms-button min-h-10 px-5 text-xs">
+            Workflow Snapshot
+          </Link>
+        </nav>
+        <button
+          type="button"
+          aria-label={open ? "Close navigation" : "Open navigation"}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          className="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-white lg:hidden"
+          onClick={() => setOpen((value) => !value)}
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
-    </section>
+      {open && (
+        <nav
+          id="mobile-navigation"
+          aria-label="Mobile navigation"
+          className="border-t border-white/[0.07] bg-[#081014] px-5 py-4 lg:hidden"
+        >
+          <div className="mx-auto grid max-w-[1180px] gap-1">
+            {links.map(([label, href]) => (
+              <a
+                key={label}
+                className="rounded-lg px-3 py-3 text-sm text-[#c9d1d5] hover:bg-white/[0.05]"
+                href={href}
+                onClick={() => setOpen(false)}
+              >
+                {label}
+              </a>
+            ))}
+            <Link
+              href="/workflow-snapshot"
+              className="wms-button mt-2 min-h-12"
+              onClick={() => setOpen(false)}
+            >
+              Workflow Snapshot
+            </Link>
+          </div>
+        </nav>
+      )}
+    </header>
   );
 }
 
-function ClosingScene() {
+function SectionHeading({
+  kicker,
+  title,
+  copy,
+  align = "left",
+}: {
+  kicker: string;
+  title: ReactNode;
+  copy?: string;
+  align?: "left" | "center";
+}) {
   return (
-    <section
-      id="contact"
-      className="relative flex min-h-[100svh] items-center overflow-hidden px-5 py-20 sm:px-8 lg:px-10"
-    >
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(45,212,191,0.24),transparent_30%),radial-gradient(circle_at_72%_70%,rgba(168,85,247,0.16),transparent_34%),linear-gradient(180deg,#030712_0%,#07111f_54%,#05070d_100%)]"
-      />
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-14 lg:grid-cols-[1fr_0.82fr] lg:items-end">
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-160px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-100/75">
-            Build the operating layer
-          </p>
-          <h2 className="mt-6 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-6xl sm:leading-[0.95] lg:text-7xl">
-            Turn workflow friction into a connected system of action.
-          </h2>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300">
-            Start with a discovery call. WMS will map your highest leverage
-            automation, reporting, integration, and infrastructure opportunities.
-          </p>
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-            <a
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-cyan-100 px-6 text-sm font-semibold text-slate-950 shadow-xl shadow-cyan-300/20 transition hover:bg-white"
-              href="mailto:hello@workplacemanagementsolutions.com?subject=Discovery%20Call%20Request"
-            >
-              Book a Discovery Call
-              <ArrowRight className="h-4 w-4" />
-            </a>
-            <a
-              className="inline-flex min-h-12 items-center justify-center break-all rounded-full border border-white/15 px-6 py-3 text-center text-sm font-semibold text-white transition hover:border-cyan-100/50 hover:bg-white/10 sm:h-12 sm:break-normal sm:py-0"
-              href="mailto:hello@workplacemanagementsolutions.com"
-            >
-              hello@workplacemanagementsolutions.com
-            </a>
-          </div>
-        </motion.div>
+    <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
+      <p className="wms-kicker">{kicker}</p>
+      <h2 className="wms-heading mt-5">{title}</h2>
+      {copy && <p className="mt-6 max-w-2xl text-base leading-7 text-[#a7b2b8] sm:text-lg">{copy}</p>}
+    </div>
+  );
+}
 
-        <motion.div
-          className="grid gap-5"
-          initial={{ opacity: 0, y: 36 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-160px" }}
-          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-        >
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-xl">
-            <p className="font-mono text-xs uppercase tracking-[0.24em] text-teal-100/75">
-              Engagement modules
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {services.map((service) => (
-                <span
-                  key={service}
-                  className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-2 text-sm text-slate-200"
-                >
-                  {service}
-                </span>
-              ))}
+function WorkflowSnapshotLink({
+  children = "Get my Workflow Snapshot",
+  className = "",
+}: {
+  children?: ReactNode;
+  className?: string;
+}) {
+  return (
+    <Link href="/workflow-snapshot" className={`wms-button ${className}`}>
+      {children}
+      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+    </Link>
+  );
+}
+
+function LeadCommandCenter() {
+  const leads = [
+    ["New website inquiry", "Captured · Home remodeling", "Now"],
+    ["Missed call recovered", "Responded · Plumbing service", "2m"],
+    ["Estimate follow-up", "Assigned · Roof repair", "12m"],
+    ["Appointment booked", "Booked · HVAC service", "Today"],
+  ];
+
+  return (
+    <div className="wms-console wms-accent-edge relative">
+      <div className="flex items-center justify-between border-b border-white/[0.07] px-4 py-3 sm:px-5">
+        <div>
+          <p className="wms-console-label">WMS command center</p>
+          <p className="mt-1 text-sm font-medium text-white">Lead operations</p>
+        </div>
+        <span className="flex items-center gap-2 text-[10px] uppercase tracking-[0.17em] text-[#7f8d94]">
+          <span className="h-2 w-2 rounded-full bg-[#54e1a4] shadow-[0_0_12px_rgba(84,225,164,.75)]" />
+          System active
+        </span>
+      </div>
+      <div className="grid gap-px bg-white/[0.06] lg:grid-cols-[1.2fr_.8fr]">
+        <div className="bg-[#0b1115] p-4 sm:p-5">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="wms-console-label">Live opportunity flow</p>
+              <p className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-white">Every lead, visible</p>
             </div>
+            <span className="rounded-full border border-[#39d5f6]/20 bg-[#39d5f6]/[0.07] px-3 py-1 text-xs text-[#73e4fa]">
+              Routing on
+            </span>
           </div>
-          <div className="grid gap-3 sm:grid-cols-3">
-            {proofPoints.map(([metric, label]) => (
+          <div className="mt-5 space-y-2">
+            {leads.map(([name, detail, time], index) => (
               <div
-                key={metric}
-                className="rounded-3xl border border-white/10 bg-slate-950/45 p-5 backdrop-blur-xl"
+                key={name}
+                className="grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-lg border border-white/[0.06] bg-white/[0.025] px-3 py-3"
               >
-                <p className="font-mono text-3xl font-semibold text-cyan-100">
-                  {metric}
-                </p>
-                <p className="mt-2 text-sm leading-6 text-slate-400">{label}</p>
+                <span
+                  className={`h-2 w-2 rounded-full ${
+                    index === 0
+                      ? "bg-[#39d5f6]"
+                      : index === 1
+                        ? "bg-[#8B5CF6]"
+                        : index === 2
+                          ? "bg-[#D946EF]"
+                          : "bg-[#54e1a4]"
+                  }`}
+                />
+                <span className="min-w-0">
+                  <span className="block truncate text-xs font-medium text-[#e9eef0] sm:text-sm">
+                    {name}
+                  </span>
+                  <span className="mt-0.5 block truncate text-[10px] text-[#718087] sm:text-xs">
+                    {detail}
+                  </span>
+                </span>
+                <span className="font-mono text-[10px] text-[#718087]">{time}</span>
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
+        <div className="grid gap-px bg-white/[0.06]">
+          <div className="bg-[#0d1418] p-4 sm:p-5">
+            <p className="wms-console-label">Missed-call recovery</p>
+            <div className="mt-4 flex items-center gap-3">
+              <span className="grid h-9 w-9 place-items-center rounded-full border border-[#39d5f6]/20 bg-[#39d5f6]/10 text-[#73e4fa]">
+                <PhoneCall className="h-4 w-4" aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-sm font-medium text-white">Automatic text sent</p>
+                <p className="mt-1 text-xs text-[#718087]">Next step: booking link</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-[#0d1418] p-4 sm:p-5">
+            <p className="wms-console-label">Pipeline visibility</p>
+            <div className="mt-5 flex h-20 items-end gap-2" aria-hidden="true">
+              {[38, 57, 46, 72, 62, 84, 76].map((height, index) => (
+                <span
+                  key={height}
+                  className={`flex-1 rounded-t-sm ${
+                    index === 5
+                      ? "bg-[#39d5f6]"
+                      : index === 3
+                        ? "bg-[#8B5CF6]"
+                        : index === 6
+                          ? "bg-[#D946EF]"
+                          : "bg-[#1b3b46]"
+                  }`}
+                  style={{ height: `${height}%` }}
+                />
+              ))}
+            </div>
+            <div className="mt-3 flex items-center justify-between text-[10px] text-[#718087]">
+              <span>Inquiry</span>
+              <span>Booked work</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute -bottom-5 left-5 right-5 rounded-lg border border-[#27414b] bg-[#102028] px-4 py-3 shadow-2xl sm:left-auto sm:w-[310px]">
+        <div className="flex items-center justify-between gap-4">
+          <span className="flex items-center gap-2 text-xs text-[#c9d1d5]">
+            <Zap className="h-3.5 w-3.5 text-[#73e4fa]" aria-hidden="true" />
+            Follow-up sequence active
+          </span>
+          <span className="font-mono text-[10px] text-[#54e1a4]">ON</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function WorkflowLeakConsole() {
+  return (
+    <div className="wms-console">
+      <div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-4">
+        <div>
+          <p className="wms-console-label">Workflow diagnostic</p>
+          <p className="mt-1 text-sm font-medium text-white">Opportunity leak map</p>
+        </div>
+        <CircleDotDashed className="h-5 w-5 text-[#39d5f6]" aria-hidden="true" />
+      </div>
+      <div className="space-y-3 p-4 sm:p-5">
+        {problems.map((problem, index) => {
+          const Icon = problem.icon;
+          return (
+            <div
+              key={problem.title}
+              className="grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-lg border border-white/[0.06] bg-white/[0.025] p-3.5"
+            >
+              <span className="grid h-9 w-9 place-items-center rounded-md border border-[#27414b] bg-[#111b20] text-[#73e4fa]">
+                <Icon className="h-4 w-4" aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-sm font-medium text-[#eef2f3]">{problem.title}</p>
+                <p className="mt-1 text-xs leading-5 text-[#718087]">{problem.copy}</p>
+              </div>
+              <span
+                className={`rounded-full px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] ${
+                  index < 2
+                    ? "bg-[#f3c96a]/10 text-[#f3c96a]"
+                    : "bg-[#39d5f6]/10 text-[#73e4fa]"
+                }`}
+              >
+                {index < 2 ? "Leak" : "Friction"}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function OperatingSystemMap() {
+  const statuses = [
+    "Inquiry received",
+    "Response sent",
+    "Booking offered",
+    "Sequence active",
+    "Pipeline visible",
+    "Review ready",
+    "System connected",
+  ];
+
+  return (
+    <div className="wms-console wms-product-proof overflow-visible">
+      <div className="border-b border-white/[0.07] px-5 py-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <p className="wms-console-label">Connected operating system</p>
+            <p className="mt-1 text-sm font-medium text-white">From first inquiry to ongoing follow-up</p>
+          </div>
+          <span className="rounded-full border border-[#27414b] px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[#718087]">
+            One visible pipeline
+          </span>
+        </div>
+      </div>
+      <div className="grid gap-px bg-white/[0.06] sm:grid-cols-2 lg:grid-cols-7">
+        {capabilities.map((capability, index) => {
+          const Icon = capability.icon;
+          return (
+            <div
+              key={capability.title}
+              className={`relative bg-[#0d1418] px-4 py-6 text-center ${
+                index === 1 ? "lg:bg-[#100f1b]" : ""
+              }`}
+            >
+              <span
+                className={`mx-auto grid h-10 w-10 place-items-center rounded-md border bg-[#111b20] ${
+                  index === 1
+                    ? "border-[#8B5CF6]/40 text-[#c4b5fd]"
+                    : "border-[#27414b] text-[#73e4fa]"
+                }`}
+              >
+                <Icon className="h-4 w-4" aria-hidden="true" />
+              </span>
+              <p className="mt-3 text-xs font-medium text-white">{capability.title}</p>
+              <p className="mt-2 text-[10px] uppercase leading-4 tracking-[0.07em] text-[#718087]">
+                {capability.signal}
+              </p>
+              <span className="mt-4 inline-flex items-center gap-1.5 text-[9px] font-medium text-[#a7b2b8]">
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    index === 1
+                      ? "bg-[#8B5CF6]"
+                      : index === 5
+                        ? "bg-[#F472B6]"
+                        : "bg-[#39d5f6]"
+                  }`}
+                />
+                {statuses[index]}
+              </span>
+              {index < capabilities.length - 1 && (
+                <ArrowRight
+                  className={`absolute -right-2 top-9 z-10 hidden h-3.5 w-3.5 lg:block ${
+                    index === 0 ? "text-[#8B5CF6]" : "text-[#39d5f6]"
+                  }`}
+                  aria-hidden="true"
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <div className="grid gap-px bg-white/[0.06] sm:grid-cols-3">
+        <div className="bg-[#0b1115] p-5">
+          <p className="wms-console-label">Current stage</p>
+          <p className="mt-2 text-xl font-semibold text-white">Appointment booked</p>
+          <p className="mt-2 text-xs text-[#718087]">Owner: scheduling workflow</p>
+        </div>
+        <div className="bg-[#0b1115] p-5">
+          <p className="wms-console-label">Next action</p>
+          <p className="mt-2 text-xl font-semibold text-white">Confirmation sent</p>
+          <p className="mt-2 text-xs text-[#718087]">Follow-up remains visible</p>
+        </div>
+        <div className="bg-[#0b1115] p-5">
+          <p className="wms-console-label">System status</p>
+          <p className="mt-2 flex items-center gap-2 text-xl font-semibold text-white">
+            <span className="h-2 w-2 rounded-full bg-[#54e1a4]" />
+            Connected
+          </p>
+          <p className="mt-2 text-xs text-[#718087]">No manual handoff required</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SnapshotDiagnostic() {
+  const areas = [
+    ["Lead flow", "Review"],
+    ["Handoffs", "Review"],
+    ["Tools", "Mapped"],
+    ["Follow-up", "Priority"],
+    ["Operational bottlenecks", "Review"],
+    ["What to fix first", "Output"],
+  ];
+
+  return (
+    <div className="wms-console">
+      <div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-4">
+        <div>
+          <p className="wms-console-label">WMS Workflow Snapshot</p>
+          <p className="mt-1 text-sm font-medium text-white">Business diagnostic</p>
+        </div>
+        <span className="rounded-full bg-[#39d5f6]/10 px-3 py-1 text-[10px] uppercase tracking-[0.15em] text-[#73e4fa]">
+          15 minutes
+        </span>
+      </div>
+      <div className="p-4 sm:p-5">
+        <div className="mb-5 flex gap-1.5" aria-hidden="true">
+          {[0, 1, 2, 3, 4, 5].map((item) => (
+            <span
+              key={item}
+              className={`h-1 flex-1 rounded-full ${
+                item < 3
+                  ? "bg-[#39d5f6]"
+                  : item === 3
+                    ? "bg-gradient-to-r from-[#39d5f6] to-[#8B5CF6]"
+                    : "bg-white/[0.08]"
+              }`}
+            />
+          ))}
+        </div>
+        <div className="space-y-2">
+          {areas.map(([area, status], index) => (
+            <div
+              key={area}
+              className="flex items-center justify-between gap-4 rounded-lg border border-white/[0.06] bg-white/[0.025] px-4 py-3"
+            >
+              <span className="flex items-center gap-3 text-sm text-[#dce3e6]">
+                <span
+                  className={`grid h-5 w-5 place-items-center rounded-full border ${
+                    index === 3
+                      ? "border-[#f3c96a]/40 bg-[#f3c96a]/10 text-[#f3c96a]"
+                      : "border-[#39d5f6]/30 bg-[#39d5f6]/10 text-[#73e4fa]"
+                  }`}
+                >
+                  {index < 3 ? <Check className="h-3 w-3" /> : <span className="h-1.5 w-1.5 rounded-full bg-current" />}
+                </span>
+                {area}
+              </span>
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#718087]">
+                {status}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 rounded-lg border border-[#27414b] bg-[#102028] p-4">
+          <p className="wms-console-label text-[#73e4fa]">Diagnostic output</p>
+          <p className="mt-2 text-sm leading-6 text-[#dce3e6]">
+            Identify the highest-value workflow problem and recommend the best next step.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FounderLedSection() {
+  return (
+    <section
+      id="founder-led"
+      className="wms-section wms-founder-section scroll-mt-20 border-b border-white/[0.06]"
+    >
+      <div className="mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[1.04fr_.96fr] lg:items-center">
+        <figure className="wms-founder-photo">
+          <Image
+            src="/wms-founder-led-operations.jpg"
+            alt="A consultant and business owner reviewing an operational workflow together on a laptop."
+            width={1600}
+            height={1066}
+            sizes="(max-width: 1024px) 100vw, 52vw"
+            className="h-auto w-full object-cover"
+          />
+          <div className="wms-founder-photo-shade" aria-hidden="true" />
+          <figcaption className="absolute inset-x-0 bottom-0 z-10 flex items-center gap-3 p-5 text-xs text-[#dce3e6] sm:p-6">
+            <span className="h-px w-8 bg-gradient-to-r from-[#39d5f6] to-[#8B5CF6]" />
+            Systems are built with people, not handed off to them.
+          </figcaption>
+        </figure>
+
+        <div>
+          <p className="wms-kicker wms-kicker-violet">Founder-led implementation</p>
+          <h2 className="wms-heading mt-5">
+            Built by an <span className="text-[#39d5f6]">operator,</span> not another software vendor.
+          </h2>
+          <p className="mt-6 text-base leading-7 text-[#a7b2b8] sm:text-lg sm:leading-8">
+            WMS was created by Ben Bentitou after more than two decades working across systems
+            engineering, business technology, and operations. The goal is straightforward:
+            connect the tools, people, and follow-up processes that turn interest into booked work.
+          </p>
+          <div className="mt-8 flex items-center gap-4 border-t border-white/[0.08] pt-6">
+            <span className="wms-founder-monogram" aria-hidden="true">
+              WMS
+            </span>
+            <p className="max-w-xl text-sm font-medium leading-6 text-[#dce3e6]">
+              You work directly with the person helping design and implement the system.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-white/[0.07] bg-[#05080a] px-5 py-10 sm:px-8">
+      <div className="mx-auto flex max-w-[1180px] flex-col gap-8 text-sm text-[#718087] sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <WmsMark compact />
+          <a className="mt-4 block hover:text-[#73e4fa]" href={`tel:${siteConfig.phoneE164}`}>
+            {siteConfig.phone}
+          </a>
+          <a className="mt-1 block hover:text-[#73e4fa]" href={`mailto:${siteConfig.email}`}>
+            {siteConfig.email}
+          </a>
+          <p className="mt-1">{siteConfig.address.formatted}</p>
+        </div>
+        <div className="flex flex-wrap gap-x-5 gap-y-3">
+          <Link className="hover:text-white" href="/privacy">
+            Privacy
+          </Link>
+          <Link className="hover:text-white" href="/terms">
+            Terms
+          </Link>
+          <a className="hover:text-white" href="https://try.workplacemgtsolutions.com">
+            25 Leads in 7 Days
+          </a>
+          <a className="hover:text-white" href="https://app.workplacemgtsolutions.com">
+            Client login
+          </a>
+        </div>
+      </div>
+    </footer>
   );
 }
 
 export function EcosystemExperience() {
   return (
-    <main id="top" className="bg-[#05070d] text-white">
-      <OpeningHero />
-      <EcosystemNarrative />
-      <MobileNarrative />
-      <ClosingScene />
+    <main id="top" className="bg-[#06090b] text-white">
+      <Header />
+
+      <section className="wms-grid-bg relative overflow-hidden border-b border-white/[0.06] px-5 py-20 sm:px-8 sm:py-28 lg:py-32">
+        <div className="wms-hero-glow" aria-hidden="true" />
+        <InteractiveDotGrid className="z-[1] [mask-image:radial-gradient(ellipse_at_center,black_42%,transparent_98%)]" />
+        <div className="relative z-10 mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.84fr_1.16fr] lg:items-center">
+          <div>
+            <p className="wms-kicker">Modern systems for small business</p>
+            <h1 className="wms-display mt-6 max-w-[680px]">
+              Modern enterprise solutions.{" "}
+              <span className="text-[#39d5f6]">Built for small business.</span>
+            </h1>
+            <p className="mt-7 max-w-xl text-lg leading-8 text-[#a7b2b8]">
+              WMS connects marketing, CRM, automation, communication, workflows, and reporting
+              into one managed system.
+            </p>
+            <p className="mt-4 text-base text-[#718087]">
+              Get enterprise capability without the enterprise cost or complexity.
+            </p>
+            <p className="mt-2 text-base font-medium text-[#c9d1d5]">
+              Respond faster. Book more work. Run with less chaos.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <WorkflowSnapshotLink>Get my Workflow Snapshot</WorkflowSnapshotLink>
+              <a href="#process" className="wms-button-secondary">
+                See how it works
+              </a>
+            </div>
+            <div className="mt-10 grid max-w-xl grid-cols-3 border-t border-white/[0.08] pt-5 text-xs text-[#718087]">
+              <span>Capture every lead</span>
+              <span className="border-l border-white/[0.08] pl-4">Automate follow-up</span>
+              <span className="border-l border-white/[0.08] pl-4">See the whole workflow</span>
+            </div>
+          </div>
+          <div className="pb-5">
+            <LeadCommandCenter />
+          </div>
+        </div>
+      </section>
+
+      <section id="how-we-help" className="wms-section">
+        <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+          <SectionHeading
+            kicker="Connected operations"
+            title={
+              <>
+                Your tools should work together.{" "}
+                <span className="text-[#39d5f6]">Your business should work better.</span>
+              </>
+            }
+            copy="WMS connects every lead, conversation, estimate, appointment, and follow-up so your team always knows what happens next."
+          />
+          <WorkflowLeakConsole />
+        </div>
+      </section>
+
+      <section className="wms-section wms-section-alt border-y border-white/[0.06]">
+        <div className="mx-auto max-w-[1180px]">
+          <SectionHeading
+            kicker="Managed implementation"
+            title={
+              <>
+                We don&apos;t just deliver software.{" "}
+                <span className="text-[#39d5f6]">We put it to work.</span>
+              </>
+            }
+            copy="WMS configures the system around your workflow, connects the tools, and helps your team use it confidently."
+          />
+          <div className="mt-14 grid gap-px overflow-hidden rounded-xl border border-[#1a292f] bg-[#1a292f] md:grid-cols-2 lg:grid-cols-4">
+            {implementationSteps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <article key={step.label} className="bg-[#0d1418] p-6">
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-10 w-10 place-items-center rounded-lg border border-[#27414b] bg-[#111b20] text-[#73e4fa]">
+                      <Icon className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <span className="font-mono text-[10px] text-[#4f6068]">0{index + 1}</span>
+                  </div>
+                  <h3 className="wms-card-title mt-8">{step.label}</h3>
+                  <p className="mt-3 text-sm leading-6 text-[#8d9ba2]">{step.copy}</p>
+                </article>
+              );
+            })}
+          </div>
+          <div className="mt-8 flex flex-col justify-between gap-5 rounded-xl border border-[#1a292f] bg-[#0d1418] p-6 sm:flex-row sm:items-center">
+            <p className="max-w-3xl text-sm leading-7 text-[#a7b2b8]">
+              Every new customer receives a one-on-one onboarding session where we help configure
+              your website, connect your phone number, set up AI automations, and launch review
+              requests.
+            </p>
+            <span className="shrink-0 text-sm font-medium text-[#73e4fa]">
+              Platform + people
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <FounderLedSection />
+
+      <section className="wms-section wms-section-alt border-y border-white/[0.06]">
+        <div className="mx-auto max-w-[1180px]">
+          <SectionHeading
+            kicker="Accountability built in"
+            title={
+              <>
+                Every task has an owner.{" "}
+                <span className="text-[#39d5f6]">Every result is measured and reviewed.</span>
+              </>
+            }
+            copy="WMS tracks what was assigned, what was completed, what needs review, and when a human should step in."
+          />
+          <div className="mt-14 grid gap-px overflow-hidden rounded-xl border border-[#1a292f] bg-[#1a292f] md:grid-cols-2 lg:grid-cols-4">
+            {accountabilityItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article key={item.title} className="bg-[#0d1418] p-6">
+                  <span className="grid h-10 w-10 place-items-center rounded-lg border border-[#27414b] bg-[#111b20] text-[#73e4fa]">
+                    <Icon className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <h3 className="wms-card-title mt-8">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-[#8d9ba2]">{item.copy}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="operating-system" className="wms-section scroll-mt-20">
+        <div className="mx-auto max-w-[1180px]">
+          <SectionHeading
+            kicker="The WMS operating system"
+            title={
+              <>
+                One system that turns interest into{" "}
+                <span className="text-[#39d5f6]">qualified leads and bookings.</span>
+              </>
+            }
+            copy="Capture the opportunity, respond while it is active, and keep every next step visible."
+          />
+          <div className="mt-14">
+            <OperatingSystemMap />
+          </div>
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {capabilities.map((capability) => {
+              const Icon = capability.icon;
+              return (
+                <article key={capability.title} className="wms-feature-row">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-[#27414b] bg-[#111b20] text-[#73e4fa]">
+                    <Icon className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3 className="text-sm font-semibold text-white">{capability.title}</h3>
+                    <p className="mt-1.5 text-sm leading-6 text-[#8d9ba2]">{capability.copy}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+          <div className="mt-10 grid gap-px overflow-hidden rounded-xl border border-[#1a292f] bg-[#1a292f] lg:grid-cols-3">
+            {systemGroups.map((group) => {
+              const Icon = group.icon;
+              return (
+                <article key={group.title} className="bg-[#0d1418] p-6">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-9 w-9 place-items-center rounded-lg border border-[#27414b] bg-[#111b20] text-[#73e4fa]">
+                      <Icon className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <h3 className="wms-card-title">{group.title}</h3>
+                  </div>
+                  <ul className="mt-6 space-y-3">
+                    {group.items.map((item) => (
+                      <li key={item} className="flex items-center gap-3 text-sm text-[#a7b2b8]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[#39d5f6]" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="process" className="wms-section wms-section-alt scroll-mt-20 border-y border-white/[0.06]">
+        <div className="mx-auto max-w-[1180px]">
+          <SectionHeading
+            kicker="How it works"
+            title={
+              <>
+                Diagnose. Build. Launch. <span className="text-[#39d5f6]">Improve.</span>
+              </>
+            }
+            copy="Start with the highest-value bottleneck, build the supporting system, then improve what the results reveal."
+          />
+          <ol className="relative mt-14 grid gap-4 lg:grid-cols-5">
+            {process.map(([number, title, copy], index) => (
+              <li key={title} className="wms-process-card">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[10px] text-[#73e4fa]">{number}</span>
+                  {index < process.length - 1 && (
+                    <ArrowRight className="hidden h-4 w-4 text-[#315260] lg:block" aria-hidden="true" />
+                  )}
+                </div>
+                <h3 className="wms-card-title mt-8">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-[#8d9ba2]">{copy}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="wms-section">
+        <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div>
+            <SectionHeading
+              kicker="WMS Workflow Snapshot"
+              title={
+                <>
+                  Show us the workflow slowing your{" "}
+                  <span className="text-[#39d5f6]">business down.</span>
+                </>
+              }
+              copy="Complete a focused 15-minute assessment. We will map your lead flow, handoffs, tools, follow-up, and operational bottlenecks, then show you what to fix first."
+            />
+            <p className="mt-8 text-base font-medium text-white">
+              Start with the Workflow Snapshot and identify what to fix first.
+            </p>
+            <WorkflowSnapshotLink className="mt-7">Start my Workflow Snapshot</WorkflowSnapshotLink>
+          </div>
+          <SnapshotDiagnostic />
+        </div>
+      </section>
+
+      <section className="wms-section wms-section-alt border-y border-white/[0.06]">
+        <div className="mx-auto max-w-[1180px]">
+          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <SectionHeading
+              kicker="For home-service businesses"
+              title={
+                <>
+                  Need demand now? <span className="text-[#39d5f6]">25 leads in 7 days.</span>
+                </>
+              }
+              copy="Built for qualified home-service companies with the capacity to answer, book, and serve more customers. One defined market. One focused campaign. One measurable seven-day sprint."
+            />
+            <div className="rounded-xl border border-[#1a292f] bg-[#0d1418] p-5">
+              <div className="flex items-center justify-between border-b border-white/[0.07] pb-4">
+                <div>
+                  <p className="wms-console-label">Launch program</p>
+                  <p className="mt-1 text-sm font-medium text-white">Seven-day demand sprint</p>
+                </div>
+                <span className="rounded-full bg-[#39d5f6]/10 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-[#73e4fa]">
+                  Qualified companies
+                </span>
+              </div>
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                {leadOfferPoints.map((point, index) => (
+                  <article
+                    key={point.title}
+                    className="rounded-lg border border-white/[0.06] bg-white/[0.025] p-4"
+                  >
+                    <span className="font-mono text-[9px] text-[#4f6068]">0{index + 1}</span>
+                    <h3 className="mt-3 text-sm font-semibold text-white">{point.title}</h3>
+                    <p className="mt-2 text-xs leading-5 text-[#8d9ba2]">{point.copy}</p>
+                  </article>
+                ))}
+              </div>
+              <a
+                href="https://try.workplacemgtsolutions.com"
+                className="wms-button mt-5 w-full"
+              >
+                Explore the program
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="wms-section">
+        <div className="mx-auto max-w-[1180px]">
+          <SectionHeading
+            kicker="The result"
+            title={
+              <>
+                Respond faster. Book more work.{" "}
+                <span className="text-[#39d5f6]">Run with less chaos.</span>
+              </>
+            }
+            copy="The system should make opportunities easier to see, next steps easier to execute, and performance easier to improve."
+          />
+          <div className="mt-14 grid gap-px overflow-hidden rounded-xl border border-[#1a292f] bg-[#1a292f] sm:grid-cols-2 lg:grid-cols-4">
+            {outcomes.map((outcome) => {
+              const Icon = outcome.icon;
+              return (
+                <div key={outcome.title} className="flex items-center gap-3 bg-[#0d1418] p-5">
+                  <Icon className="h-4 w-4 shrink-0 text-[#73e4fa]" aria-hidden="true" />
+                  <p className="text-sm font-medium text-[#dce3e6]">{outcome.title}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="wms-section wms-section-alt border-y border-white/[0.06]">
+        <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.72fr_1.28fr]">
+          <SectionHeading
+            kicker="Frequently asked questions"
+            title={
+              <>
+                Everything you need to know about the{" "}
+                <span className="text-[#39d5f6]">platform.</span>
+              </>
+            }
+            copy="How the system works, what implementation requires, and what you can keep."
+          />
+          <div className="divide-y divide-white/[0.07] border-y border-white/[0.07]">
+            {faqItems.map((item) => (
+              <details key={item.question} className="group py-1">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-base font-medium text-white">
+                  {item.question}
+                  <ChevronDown
+                    className="h-4 w-4 shrink-0 text-[#73e4fa] transition group-open:rotate-180"
+                    aria-hidden="true"
+                  />
+                </summary>
+                <p className="max-w-2xl pb-6 pr-8 text-sm leading-7 text-[#8d9ba2]">{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="wms-section">
+        <div className="wms-final-panel mx-auto grid max-w-[1180px] gap-10 p-7 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end lg:p-14">
+          <div>
+            <p className="wms-kicker">Your next system</p>
+            <h2 className="wms-heading mt-5 max-w-4xl">
+              Your next system should make work easier,{" "}
+              <span className="text-[#39d5f6]">not add another login.</span>
+            </h2>
+            <p className="mt-5 text-base text-[#a7b2b8]">Start with the Workflow Snapshot.</p>
+          </div>
+          <WorkflowSnapshotLink className="w-full lg:w-auto">
+            Get my Workflow Snapshot
+          </WorkflowSnapshotLink>
+        </div>
+      </section>
+
+      <Footer />
     </main>
   );
 }

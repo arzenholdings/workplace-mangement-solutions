@@ -1,23 +1,42 @@
 import type { Metadata } from "next";
+import { Inter, Inter_Tight } from "next/font/google";
+import Script from "next/script";
 import { siteConfig } from "@/lib/site";
+import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  variable: "--font-inter-tight",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   applicationName: siteConfig.name,
   referrer: "origin-when-cross-origin",
   title: {
-    default: `${siteConfig.name} | AI Operations Consulting`,
+    default: "Workplace Management Solutions | AI Automation for Small Business",
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
   keywords: [
-    "AI automation consulting",
-    "workflow automation",
-    "operational reporting",
-    "systems integration",
-    "business process optimization",
-    "enterprise infrastructure",
+    "GoHighLevel implementation",
+    "GoHighLevel automation",
+    "CRM workflow automation",
+    "business process automation",
+    "small business CRM systems",
+    "automated lead follow-up",
+    "workflow improvement",
+    "operating systems for small business",
+    "business systems consulting",
+    "GoHighLevel consultant",
   ],
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
@@ -25,9 +44,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  category: "technology consulting",
+  category: "business services",
   openGraph: {
-    title: `${siteConfig.name} | AI Operations Consulting`,
+    title: "Workplace Management Solutions | AI Automation for Small Business",
     description: siteConfig.socialDescription,
     url: "/",
     siteName: siteConfig.name,
@@ -38,13 +57,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} AI operations consulting preview`,
+        alt: `${siteConfig.name} connected lead and workflow operating system`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | AI Operations Consulting`,
+    title: "Workplace Management Solutions | AI Automation for Small Business",
     description: siteConfig.socialDescription,
     images: ["/twitter-image"],
   },
@@ -59,10 +78,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: {
-    icon: [{ url: "/favicon.ico" }, { url: "/icon", type: "image/png" }],
-    apple: [{ url: "/apple-icon", type: "image/png" }],
-  },
 };
 
 export default function RootLayout({
@@ -71,9 +86,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full scroll-smooth antialiased">
+    <html
+      lang="en"
+      className={`${inter.variable} ${interTight.variable} h-full scroll-smooth antialiased`}
+    >
       <body className="min-h-full bg-background text-foreground">
+        <StructuredData />
         {children}
+        <Script
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="6a5e92cbfd9ec29d7c8c77f6"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

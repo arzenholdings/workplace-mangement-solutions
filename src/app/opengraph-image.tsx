@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site";
 
 export const alt =
-  "Workplace Management Solutions AI operations consulting preview";
+  "Workplace Management Solutions modern enterprise solutions for small business";
 
 export const size = {
   width: 1200,
@@ -64,7 +64,7 @@ export default function Image() {
               textTransform: "uppercase",
             }}
           >
-            AI operations ecosystem
+            Modern Systems for Small Business
           </div>
           <div
             style={{
@@ -76,7 +76,7 @@ export default function Image() {
               letterSpacing: 0,
             }}
           >
-            Your business systems, moving as one intelligent field.
+            Modern enterprise solutions. Built for small business.
           </div>
           <div
             style={{
@@ -87,8 +87,7 @@ export default function Image() {
               lineHeight: 1.35,
             }}
           >
-            AI automation, reporting, integrations, workflow design, and
-            infrastructure modernization.
+            Enterprise capability without the enterprise cost or complexity.
           </div>
         </div>
       </div>
