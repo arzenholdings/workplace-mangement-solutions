@@ -15,9 +15,13 @@ export default function PrivacyPage() {
     <main className="wms-grid-bg min-h-screen bg-[#06090b] px-5 py-6 text-white sm:px-8 lg:px-10">
       <div className="mx-auto max-w-4xl">
         <header className="flex items-center justify-between border-b border-white/[0.07] pb-4">
-          <Link href="/" className="flex items-center gap-3" aria-label={`${siteConfig.name} home`}>
+          <a
+            href={siteConfig.onboardingUrl}
+            className="flex items-center gap-3"
+            aria-label={`Start with ${siteConfig.name}`}
+          >
             <WmsBrandLogo priority />
-          </Link>
+          </a>
           <Link href="/" className="wms-button-secondary min-h-11 px-4">
             <ArrowLeft className="h-4 w-4" />
             Home
