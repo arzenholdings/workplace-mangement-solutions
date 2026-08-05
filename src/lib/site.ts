@@ -10,6 +10,8 @@ export const siteConfig = {
   shortName: "WMS",
   url: siteUrl,
   domain: "workplacemanagementsolutions.com",
+  onboardingUrl: "https://try.workplacemgtsolutions.com",
+  clientLoginUrl: "https://app.workplacemgtsolutions.com",
   email: "sales@workplacemgtsolutions.com",
   phone: "425-599-1277",
   phoneE164: "+14255991277",
@@ -20,6 +22,8 @@ export const siteConfig = {
     postalCode: "98006",
     country: "US",
     formatted: "14205 SE 36th St, Bellevue, WA 98006",
+    mapsUrl:
+      "https://www.google.com/maps/search/?api=1&query=14205+SE+36th+St%2C+Bellevue%2C+WA+98006",
   },
   description:
     "WMS brings modern enterprise solutions to small businesses without the enterprise cost or complexity.",
