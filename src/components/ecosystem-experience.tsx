@@ -257,16 +257,20 @@ function Header() {
   const links = [
     ["Solutions", "#operating-system"],
     ["How it works", "#process"],
-    ["25 Leads in 7 Days", "https://try.workplacemgtsolutions.com"],
-    ["Client login", "https://app.workplacemgtsolutions.com"],
+    ["25 Leads in 7 Days", siteConfig.onboardingUrl],
+    ["Client login", siteConfig.clientLoginUrl],
   ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.07] bg-[#06090b]/90 backdrop-blur-xl">
       <div className="mx-auto flex h-[68px] max-w-[1180px] items-center justify-between px-5 sm:px-8">
-        <Link href="/" aria-label="Workplace Management Solutions home" className="text-white">
+        <a
+          href={siteConfig.onboardingUrl}
+          aria-label="Start with Workplace Management Solutions"
+          className="text-white"
+        >
           <WmsMark />
-        </Link>
+        </a>
         <nav aria-label="Primary navigation" className="hidden items-center gap-7 lg:flex">
           {links.map(([label, href]) => (
             <a
@@ -277,9 +281,9 @@ function Header() {
               {label}
             </a>
           ))}
-          <Link href="/workflow-snapshot" className="wms-button min-h-10 px-5 text-xs">
-            Workflow Snapshot
-          </Link>
+          <a href={siteConfig.onboardingUrl} className="wms-button min-h-10 px-5 text-xs">
+            Get started
+          </a>
         </nav>
         <button
           type="button"
@@ -309,13 +313,13 @@ function Header() {
                 {label}
               </a>
             ))}
-            <Link
-              href="/workflow-snapshot"
+            <a
+              href={siteConfig.onboardingUrl}
               className="wms-button mt-2 min-h-12"
               onClick={() => setOpen(false)}
             >
-              Workflow Snapshot
-            </Link>
+              Get started
+            </a>
           </div>
         </nav>
       )}
@@ -351,10 +355,10 @@ function WorkflowSnapshotLink({
   className?: string;
 }) {
   return (
-    <Link href="/workflow-snapshot" className={`wms-button ${className}`}>
+    <a href={siteConfig.onboardingUrl} className={`wms-button ${className}`}>
       {children}
       <ArrowRight className="h-4 w-4" aria-hidden="true" />
-    </Link>
+    </a>
   );
 }
 
@@ -731,14 +735,27 @@ function Footer() {
     <footer className="border-t border-white/[0.07] bg-[#05080a] px-5 py-10 sm:px-8">
       <div className="mx-auto flex max-w-[1180px] flex-col gap-8 text-sm text-[#718087] sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <WmsMark compact />
+          <a
+            href={siteConfig.onboardingUrl}
+            aria-label="Start with Workplace Management Solutions"
+            className="inline-flex text-white"
+          >
+            <WmsMark compact />
+          </a>
           <a className="mt-4 block hover:text-[#73e4fa]" href={`tel:${siteConfig.phoneE164}`}>
             {siteConfig.phone}
           </a>
           <a className="mt-1 block hover:text-[#73e4fa]" href={`mailto:${siteConfig.email}`}>
             {siteConfig.email}
           </a>
-          <p className="mt-1">{siteConfig.address.formatted}</p>
+          <a
+            className="mt-1 block hover:text-[#73e4fa]"
+            href={siteConfig.address.mapsUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {siteConfig.address.formatted}
+          </a>
         </div>
         <div className="flex flex-wrap gap-x-5 gap-y-3">
           <Link className="hover:text-white" href="/privacy">
@@ -747,10 +764,10 @@ function Footer() {
           <Link className="hover:text-white" href="/terms">
             Terms
           </Link>
-          <a className="hover:text-white" href="https://try.workplacemgtsolutions.com">
+          <a className="hover:text-white" href={siteConfig.onboardingUrl}>
             25 Leads in 7 Days
           </a>
-          <a className="hover:text-white" href="https://app.workplacemgtsolutions.com">
+          <a className="hover:text-white" href={siteConfig.clientLoginUrl}>
             Client login
           </a>
         </div>
@@ -1033,7 +1050,7 @@ export function EcosystemExperience() {
                 ))}
               </div>
               <a
-                href="https://try.workplacemgtsolutions.com"
+                href={siteConfig.onboardingUrl}
                 className="wms-button mt-5 w-full"
               >
                 Explore the program
