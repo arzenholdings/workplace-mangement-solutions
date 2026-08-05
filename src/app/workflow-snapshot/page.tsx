@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Radar } from "lucide-react";
 import { WmsBrandLogo } from "@/components/wms-brand-logo";
 import { WorkflowSnapshotForm } from "@/components/workflow-snapshot-form";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "WMS Workflow Snapshot | Find the Bottleneck Slowing Your Business",
@@ -23,9 +24,13 @@ export default function WorkflowSnapshotPage() {
       <div className="wms-hero-glow" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-6xl">
         <header className="flex items-center justify-between border-b border-white/[0.07] py-4">
-          <Link href="/" className="flex items-center gap-3" aria-label="Workplace Management Solutions home">
+          <a
+            href={siteConfig.onboardingUrl}
+            className="flex items-center gap-3"
+            aria-label="Start with Workplace Management Solutions"
+          >
             <WmsBrandLogo priority />
-          </Link>
+          </a>
           <Link
             href="/"
             className="wms-button-secondary min-h-11 px-4"
@@ -52,10 +57,7 @@ export default function WorkflowSnapshotPage() {
               WMS will use your answers to identify the highest-value workflow problem and recommend
               the best next step.
             </p>
-            <a
-              href="#snapshot-form"
-              className="wms-button mt-8"
-            >
+            <a href={siteConfig.onboardingUrl} className="wms-button mt-8">
               Start my Workflow Snapshot
             </a>
           </div>
