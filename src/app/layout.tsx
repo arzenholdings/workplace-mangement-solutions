@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Inter, Inter_Tight } from "next/font/google";
 import Script from "next/script";
 import { siteConfig } from "@/lib/site";
@@ -100,6 +101,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </body>
+      <GoogleAnalytics gaId="G-RBKS4L6PYQ" />
     </html>
   );
 }

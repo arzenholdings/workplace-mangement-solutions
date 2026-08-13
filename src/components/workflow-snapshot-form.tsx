@@ -1,5 +1,6 @@
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
 import Script from "next/script";
 import { CalendarClock, CheckCircle2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -16,6 +17,7 @@ const HIGHLEVEL_ORIGINS = new Set([
 
 export function WorkflowSnapshotForm() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const submissionTrackedRef = useRef(false);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -24,6 +26,13 @@ export function WorkflowSnapshotForm() {
       if (event.source !== iframeRef.current?.contentWindow) return;
       if (!Array.isArray(event.data) || event.data[0] !== "set-sticky-contacts") return;
 
+      if (!submissionTrackedRef.current) {
+        sendGAEvent("event", "workflow_snapshot_submit", {
+          form_name: "WMS Workflow Snapshot",
+          lead_type: "workflow_snapshot",
+        });
+        submissionTrackedRef.current = true;
+      }
       setSubmitted(true);
     };
 
@@ -80,6 +89,12 @@ export function WorkflowSnapshotForm() {
             href={CALENDAR_URL}
             target="_blank"
             rel="noreferrer"
+            onClick={() =>
+              sendGAEvent("event", "calendar_booking_start", {
+                calendar_name: "WMS Discovery Call",
+                source: "workflow_snapshot_confirmation",
+              })
+            }
             className="wms-button mt-8 w-full sm:w-auto"
           >
             <CalendarClock className="h-4 w-4" aria-hidden="true" />
